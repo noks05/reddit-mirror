@@ -1,4 +1,5 @@
-export type TSizes = 28 | 20 | 16 | 14 | 12 | 10;
+export type TSizes = 50 | 28 | 20 | 16 | 14 | 12 | 10;
+export type TSizesBreak = 4 | 8 | 12 | 16 | 20;
 
 export enum EColors {
   black = "black",

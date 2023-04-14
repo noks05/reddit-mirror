@@ -9,6 +9,7 @@ import {
   SaveIcon,
   ShareIcon,
   WarningIcon,
+  IconAnon,
 } from "../icons";
 
 interface IIconsObject {
@@ -22,8 +23,8 @@ const allIcons: IIconsObject = {
   warning: <WarningIcon />,
   close: <CloseIcon />,
   menu: <MenuIcon />,
+  anon: <IconAnon />,
 };
-
 
 // export enum EIcons {
 //   comments = "comments",

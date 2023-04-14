@@ -1,4 +1,21 @@
-@import '../main.global.less';
+@black: #000;
+@orange: #CC6633;
+@green: #A4CC33;
+@whiteLightness: 100%;
+@white: hsl(0, 0%, @whiteLightness);
+@greyF4: hsl(0, 0%, calc(@whiteLightness - 4%));
+@greyF3: hsl(0, 0%, calc(@whiteLightness - 5%));
+@greyEC: hsl(0, 0%, calc(@whiteLightness - 7%));
+@greyD9: hsl(0, 0%, calc(@whiteLightness - 15%));
+@greyC4: hsl(0, 0%, calc(@whiteLightness - 23%));
+@grey99: hsl(0, 0%, calc(@whiteLightness - 40%));
+@grey66: hsl(0, 0%, calc(@whiteLightness - 60%));
+
+.s50 svg {
+  width: 50px;
+  height: 50px
+}
+
 .s28 svg {
   width: 28px;
   height: 28px
@@ -30,47 +47,47 @@
 }
 
 .black svg path {
-  fill: var(--black);
+  fill: @black;
 }
 
 .orange svg path {
-  fill: var(--orange);
+  fill: @orange;
 }
 
 .green svg path {
-  fill: var(--green);
+  fill: @green;
 }
 
 .white svg path {
-  fill: var(--white);
+  fill: @white;
 }
 
 .grayF4 svg path {
-  fill: var(--grayF4);
+  fill: @greyF4;
 }
 
 .greyF3 svg path {
-  fill: var(--greyF3);
+  fill: @greyF3;
+}
+
+.greyEC svg path {
+  fill: @greyEC;
 }
 
 .greyD9 svg path {
-  fill: var(--greyD9);
+  fill: @greyD9;
 }
 
 .greyC4 svg path {
-  fill: var(--greyC4);
+  fill: @greyC4;
 }
 
 .grey99 svg path {
-  fill: var(--grey99);
+  fill: @grey99;
 }
 
 .grey66 svg path {
-  fill: var(--grey66);
-}
-
-.upperCase {
-  text-transform: uppercase;
+  fill: @grey66;
 }
 
 @media all and (min-width: 320px) and (max-width: 1023px) {
@@ -103,10 +120,6 @@
     width: 10px;
     height: 10px;
   }
-}
-
-.bold {
-  font-weight: 500;
 }
 
 @media all and (min-width: 1024px) and (max-width: 1539px) {

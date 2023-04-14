@@ -118,7 +118,42 @@ eval("\r\nObject.defineProperty(exports, \"__esModule\", { value: true });\r\nex
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-eval("\r\nvar __importDefault = (this && this.__importDefault) || function (mod) {\r\n    return (mod && mod.__esModule) ? mod : { \"default\": mod };\r\n};\r\nObject.defineProperty(exports, \"__esModule\", { value: true });\r\nvar express_1 = __importDefault(__webpack_require__(/*! express */ \"express\"));\r\nvar server_1 = __importDefault(__webpack_require__(/*! react-dom/server */ \"react-dom/server\"));\r\nvar App_tsx_1 = __webpack_require__(/*! ../App.tsx */ \"./src/App.tsx\");\r\nvar indexTemplate_1 = __webpack_require__(/*! ./indexTemplate */ \"./src/server/indexTemplate.js\");\r\nvar app = (0, express_1.default)();\r\napp.use('/static', express_1.default.static('./dist/client'));\r\napp.get('/', function (req, res) {\r\n    res.send((0, indexTemplate_1.indexTemplate)(server_1.default.renderToString((0, App_tsx_1.App)())));\r\n});\r\napp.listen(3000, function () {\r\n    console.log('Server started on http://localhost:3000');\r\n});\r\n\n\n//# sourceURL=webpack:///./src/server/server.js?");
+eval("\r\nvar __importDefault = (this && this.__importDefault) || function (mod) {\r\n    return (mod && mod.__esModule) ? mod : { \"default\": mod };\r\n};\r\nObject.defineProperty(exports, \"__esModule\", { value: true });\r\nvar express_1 = __importDefault(__webpack_require__(/*! express */ \"express\"));\r\nvar server_1 = __importDefault(__webpack_require__(/*! react-dom/server */ \"react-dom/server\"));\r\nvar App_tsx_1 = __webpack_require__(/*! ../App.tsx */ \"./src/App.tsx\");\r\nvar indexTemplate_1 = __webpack_require__(/*! ./indexTemplate */ \"./src/server/indexTemplate.js\");\r\nvar app = (0, express_1.default)();\r\napp.use('/static', express_1.default.static('./dist/client'));\r\napp.get('/', function (req, res) {\r\n    res.send((0, indexTemplate_1.indexTemplate)(server_1.default.renderToString((0, App_tsx_1.App)())));\r\n});\r\napp.get('/auth', function (req, res) {\r\n    // req.query.code\r\n    res.send((0, indexTemplate_1.indexTemplate)(server_1.default.renderToString((0, App_tsx_1.App)())));\r\n});\r\napp.listen(3000, function () {\r\n    console.log('Server started on http://localhost:3000');\r\n});\r\n\n\n//# sourceURL=webpack:///./src/server/server.js?");
+
+/***/ }),
+
+/***/ "./src/shared/Break/Break.tsx":
+/*!************************************!*\
+  !*** ./src/shared/Break/Break.tsx ***!
+  \************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+eval("\r\nvar __importDefault = (this && this.__importDefault) || function (mod) {\r\n    return (mod && mod.__esModule) ? mod : { \"default\": mod };\r\n};\r\nObject.defineProperty(exports, \"__esModule\", { value: true });\r\nexports.Break = void 0;\r\nvar react_1 = __importDefault(__webpack_require__(/*! react */ \"react\"));\r\nvar break_less_1 = __importDefault(__webpack_require__(/*! ./break.less */ \"./src/shared/Break/break.less\"));\r\nvar types_global_1 = __webpack_require__(/*! ../types.global */ \"./src/shared/types.global.ts\");\r\nvar classnames_1 = __importDefault(__webpack_require__(/*! classnames */ \"classnames\"));\r\nfunction Break(props) {\r\n    var _a, _b, _c, _d, _e, _f, _g;\r\n    var _h = props.As, As = _h === void 0 ? \"span\" : _h, size = props.size, topSize = props.topSize, mobileSize = props.mobileSize, topMobileSize = props.topMobileSize, tableSize = props.tableSize, topTableSize = props.topTableSize, desktopSize = props.desktopSize, topDesktopSize = props.topDesktopSize, _j = props.color, color = _j === void 0 ? types_global_1.EColors.white : _j;\r\n    var classes = (0, classnames_1.default)(break_less_1.default[\"s\".concat(size)], break_less_1.default[color], (_a = {}, _a[break_less_1.default[\"m\".concat(topSize)]] = topSize, _a), (_b = {}, _b[break_less_1.default[\"m\".concat(mobileSize)]] = mobileSize, _b), (_c = {}, _c[break_less_1.default[\"m\".concat(topMobileSize)]] = topMobileSize, _c), (_d = {}, _d[break_less_1.default[\"t\".concat(tableSize)]] = tableSize, _d), (_e = {}, _e[break_less_1.default[\"t\".concat(topTableSize)]] = topTableSize, _e), (_f = {}, _f[break_less_1.default[\"d\".concat(desktopSize)]] = desktopSize, _f), (_g = {}, _g[break_less_1.default[\"d\".concat(topDesktopSize)]] = topDesktopSize, _g));\r\n    return (react_1.default.createElement(As, { className: classes }));\r\n}\r\nexports.Break = Break;\r\n\n\n//# sourceURL=webpack:///./src/shared/Break/Break.tsx?");
+
+/***/ }),
+
+/***/ "./src/shared/Break/break.less":
+/*!*************************************!*\
+  !*** ./src/shared/Break/break.less ***!
+  \*************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+eval("// Exports\nmodule.exports = {\n\t\"s4\": \"break__s4--mdIAL\",\n\t\"s8\": \"break__s8--uKILp\",\n\t\"s12\": \"break__s12--2nnLj\",\n\t\"s16\": \"break__s16--2aAdU\",\n\t\"s20\": \"break__s20--1TD5c\",\n\t\"inline\": \"break__inline--10BUW\",\n\t\"top\": \"break__top--H31po\",\n\t\"mobile_s4\": \"break__mobile_s4--1VaPy\",\n\t\"mobile_s8\": \"break__mobile_s8--1BQTI\",\n\t\"mobile_s12\": \"break__mobile_s12--MAF66\",\n\t\"mobile_s16\": \"break__mobile_s16--1qdeZ\",\n\t\"mobile_s20\": \"break__mobile_s20--3NArg\",\n\t\"tablet_s4\": \"break__tablet_s4--30cm0\",\n\t\"tablet_s8\": \"break__tablet_s8--1ufPQ\",\n\t\"tablet_s12\": \"break__tablet_s12--kaf3T\",\n\t\"tablet_s16\": \"break__tablet_s16--3Jm3t\",\n\t\"tablet_s20\": \"break__tablet_s20--2KICY\",\n\t\"desktop_s4\": \"break__desktop_s4--17AIS\",\n\t\"desktop_s8\": \"break__desktop_s8--3fjuG\",\n\t\"desktop_s12\": \"break__desktop_s12--2OECw\",\n\t\"desktop_s16\": \"break__desktop_s16--2CR2t\",\n\t\"desktop_s20\": \"break__desktop_s20--1WoKN\"\n};\n\n\n//# sourceURL=webpack:///./src/shared/Break/break.less?");
+
+/***/ }),
+
+/***/ "./src/shared/Break/index.ts":
+/*!***********************************!*\
+  !*** ./src/shared/Break/index.ts ***!
+  \***********************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+eval("\r\nvar __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {\r\n    if (k2 === undefined) k2 = k;\r\n    var desc = Object.getOwnPropertyDescriptor(m, k);\r\n    if (!desc || (\"get\" in desc ? !m.__esModule : desc.writable || desc.configurable)) {\r\n      desc = { enumerable: true, get: function() { return m[k]; } };\r\n    }\r\n    Object.defineProperty(o, k2, desc);\r\n}) : (function(o, m, k, k2) {\r\n    if (k2 === undefined) k2 = k;\r\n    o[k2] = m[k];\r\n}));\r\nvar __exportStar = (this && this.__exportStar) || function(m, exports) {\r\n    for (var p in m) if (p !== \"default\" && !Object.prototype.hasOwnProperty.call(exports, p)) __createBinding(exports, m, p);\r\n};\r\nObject.defineProperty(exports, \"__esModule\", { value: true });\r\n__exportStar(__webpack_require__(/*! ./Break */ \"./src/shared/Break/Break.tsx\"), exports);\r\n\n\n//# sourceURL=webpack:///./src/shared/Break/index.ts?");
 
 /***/ }),
 
@@ -562,7 +597,42 @@ eval("\r\nvar __importDefault = (this && this.__importDefault) || function (mod)
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-eval("\r\nvar __importDefault = (this && this.__importDefault) || function (mod) {\r\n    return (mod && mod.__esModule) ? mod : { \"default\": mod };\r\n};\r\nObject.defineProperty(exports, \"__esModule\", { value: true });\r\nexports.SearchBlock = void 0;\r\nvar react_1 = __importDefault(__webpack_require__(/*! react */ \"react\"));\r\nvar searchblock_less_1 = __importDefault(__webpack_require__(/*! ./searchblock.less */ \"./src/shared/Header/SearchBlock/searchblock.less\"));\r\nfunction SearchBlock() {\r\n    return (react_1.default.createElement(\"div\", { className: searchblock_less_1.default.searchBlock }, \"search block\"));\r\n}\r\nexports.SearchBlock = SearchBlock;\r\n\n\n//# sourceURL=webpack:///./src/shared/Header/SearchBlock/SearchBlock.tsx?");
+eval("\r\nvar __importDefault = (this && this.__importDefault) || function (mod) {\r\n    return (mod && mod.__esModule) ? mod : { \"default\": mod };\r\n};\r\nObject.defineProperty(exports, \"__esModule\", { value: true });\r\nexports.SearchBlock = void 0;\r\nvar react_1 = __importDefault(__webpack_require__(/*! react */ \"react\"));\r\nvar searchblock_less_1 = __importDefault(__webpack_require__(/*! ./searchblock.less */ \"./src/shared/Header/SearchBlock/searchblock.less\"));\r\nvar UserBlock_1 = __webpack_require__(/*! ./UserBlock */ \"./src/shared/Header/SearchBlock/UserBlock/index.ts\");\r\nfunction SearchBlock() {\r\n    return (react_1.default.createElement(\"div\", { className: searchblock_less_1.default.searchBlock },\r\n        \"search block\",\r\n        react_1.default.createElement(UserBlock_1.UserBlock, null)));\r\n}\r\nexports.SearchBlock = SearchBlock;\r\n\n\n//# sourceURL=webpack:///./src/shared/Header/SearchBlock/SearchBlock.tsx?");
+
+/***/ }),
+
+/***/ "./src/shared/Header/SearchBlock/UserBlock/UserBlock.tsx":
+/*!***************************************************************!*\
+  !*** ./src/shared/Header/SearchBlock/UserBlock/UserBlock.tsx ***!
+  \***************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+eval("\r\nvar __importDefault = (this && this.__importDefault) || function (mod) {\r\n    return (mod && mod.__esModule) ? mod : { \"default\": mod };\r\n};\r\nObject.defineProperty(exports, \"__esModule\", { value: true });\r\nexports.UserBlock = void 0;\r\nvar react_1 = __importDefault(__webpack_require__(/*! react */ \"react\"));\r\nvar userblock_less_1 = __importDefault(__webpack_require__(/*! ./userblock.less */ \"./src/shared/Header/SearchBlock/UserBlock/userblock.less\"));\r\nvar Icon_1 = __webpack_require__(/*! ../../../Icon */ \"./src/shared/Icon/index.ts\");\r\nvar Text_1 = __webpack_require__(/*! ../../../Text */ \"./src/shared/Text/index.ts\");\r\nvar types_global_1 = __webpack_require__(/*! ../../../types.global */ \"./src/shared/types.global.ts\");\r\nvar Break_1 = __webpack_require__(/*! ../../../Break */ \"./src/shared/Break/index.ts\");\r\nfunction UserBlock(_a) {\r\n    var avatarSrc = _a.avatarSrc, username = _a.username;\r\n    return (react_1.default.createElement(\"a\", { href: 'https://www.reddit.com/api/v1/authorize?client_id=1zvLRFTNIfKsrbNLPmr0UA&response_type=code&state=random_string&redirect_uri=http://localhost:3000/auth&duration=permanent&scope=read submit identity', className: userblock_less_1.default.userBox },\r\n        react_1.default.createElement(\"div\", { className: userblock_less_1.default.avatarBox }, avatarSrc ?\r\n            react_1.default.createElement(\"img\", { src: avatarSrc, alt: 'user avatar', className: userblock_less_1.default.avatarImage })\r\n            : react_1.default.createElement(Icon_1.Icon, { name: 'anon', size: 50, color: types_global_1.EColors.greyD9 })),\r\n        react_1.default.createElement(\"div\", { className: userblock_less_1.default.username },\r\n            react_1.default.createElement(Break_1.Break, { size: 12 }),\r\n            react_1.default.createElement(Text_1.Text, { size: 20, color: username ? types_global_1.EColors.black : types_global_1.EColors.grey99 }, username || 'Аноним'))));\r\n}\r\nexports.UserBlock = UserBlock;\r\n\n\n//# sourceURL=webpack:///./src/shared/Header/SearchBlock/UserBlock/UserBlock.tsx?");
+
+/***/ }),
+
+/***/ "./src/shared/Header/SearchBlock/UserBlock/index.ts":
+/*!**********************************************************!*\
+  !*** ./src/shared/Header/SearchBlock/UserBlock/index.ts ***!
+  \**********************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+eval("\r\nvar __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {\r\n    if (k2 === undefined) k2 = k;\r\n    var desc = Object.getOwnPropertyDescriptor(m, k);\r\n    if (!desc || (\"get\" in desc ? !m.__esModule : desc.writable || desc.configurable)) {\r\n      desc = { enumerable: true, get: function() { return m[k]; } };\r\n    }\r\n    Object.defineProperty(o, k2, desc);\r\n}) : (function(o, m, k, k2) {\r\n    if (k2 === undefined) k2 = k;\r\n    o[k2] = m[k];\r\n}));\r\nvar __exportStar = (this && this.__exportStar) || function(m, exports) {\r\n    for (var p in m) if (p !== \"default\" && !Object.prototype.hasOwnProperty.call(exports, p)) __createBinding(exports, m, p);\r\n};\r\nObject.defineProperty(exports, \"__esModule\", { value: true });\r\n__exportStar(__webpack_require__(/*! ./UserBlock */ \"./src/shared/Header/SearchBlock/UserBlock/UserBlock.tsx\"), exports);\r\n\n\n//# sourceURL=webpack:///./src/shared/Header/SearchBlock/UserBlock/index.ts?");
+
+/***/ }),
+
+/***/ "./src/shared/Header/SearchBlock/UserBlock/userblock.less":
+/*!****************************************************************!*\
+  !*** ./src/shared/Header/SearchBlock/UserBlock/userblock.less ***!
+  \****************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+eval("// Exports\nmodule.exports = {\n\t\"userBox\": \"userblock__userBox--2kCAN\",\n\t\"avatarBox\": \"userblock__avatarBox--1BN88\",\n\t\"avatarImage\": \"userblock__avatarImage--32i51\",\n\t\"username\": \"userblock__username--219Iw\"\n};\n\n\n//# sourceURL=webpack:///./src/shared/Header/SearchBlock/UserBlock/userblock.less?");
 
 /***/ }),
 
@@ -690,7 +760,7 @@ eval("\r\nvar __createBinding = (this && this.__createBinding) || (Object.create
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-eval("\r\nvar __importDefault = (this && this.__importDefault) || function (mod) {\r\n    return (mod && mod.__esModule) ? mod : { \"default\": mod };\r\n};\r\nObject.defineProperty(exports, \"__esModule\", { value: true });\r\nexports.Icon = void 0;\r\nvar react_1 = __importDefault(__webpack_require__(/*! react */ \"react\"));\r\nvar icon_less_1 = __importDefault(__webpack_require__(/*! ./icon.less */ \"./src/shared/Icon/icon.less\"));\r\nvar types_global_1 = __webpack_require__(/*! ../types.global */ \"./src/shared/types.global.ts\");\r\nvar classnames_1 = __importDefault(__webpack_require__(/*! classnames */ \"classnames\"));\r\nvar icons_1 = __webpack_require__(/*! ../icons */ \"./src/shared/icons/index.ts\");\r\nvar allIcons = {\r\n    comments: react_1.default.createElement(icons_1.CommentsIcon, null),\r\n    save: react_1.default.createElement(icons_1.SaveIcon, null),\r\n    share: react_1.default.createElement(icons_1.ShareIcon, null),\r\n    warning: react_1.default.createElement(icons_1.WarningIcon, null),\r\n    close: react_1.default.createElement(icons_1.CloseIcon, null),\r\n    menu: react_1.default.createElement(icons_1.MenuIcon, null),\r\n};\r\nfunction Icon(props) {\r\n    var _a, _b, _c;\r\n    var _d = props.As, As = _d === void 0 ? \"span\" : _d, name = props.name, size = props.size, mobileSize = props.mobileSize, tableSize = props.tableSize, desktopSize = props.desktopSize, _e = props.color, color = _e === void 0 ? types_global_1.EColors.greyEC : _e;\r\n    var classes = (0, classnames_1.default)(icon_less_1.default[\"s\".concat(size)], icon_less_1.default[color], (_a = {}, _a[icon_less_1.default[\"m\".concat(mobileSize)]] = mobileSize, _a), (_b = {}, _b[icon_less_1.default[\"t\".concat(tableSize)]] = tableSize, _b), (_c = {}, _c[icon_less_1.default[\"d\".concat(desktopSize)]] = desktopSize, _c));\r\n    return (react_1.default.createElement(As, { className: classes }, allIcons[name]));\r\n}\r\nexports.Icon = Icon;\r\n\n\n//# sourceURL=webpack:///./src/shared/Icon/Icon.tsx?");
+eval("\r\nvar __importDefault = (this && this.__importDefault) || function (mod) {\r\n    return (mod && mod.__esModule) ? mod : { \"default\": mod };\r\n};\r\nObject.defineProperty(exports, \"__esModule\", { value: true });\r\nexports.Icon = void 0;\r\nvar react_1 = __importDefault(__webpack_require__(/*! react */ \"react\"));\r\nvar icon_less_1 = __importDefault(__webpack_require__(/*! ./icon.less */ \"./src/shared/Icon/icon.less\"));\r\nvar types_global_1 = __webpack_require__(/*! ../types.global */ \"./src/shared/types.global.ts\");\r\nvar classnames_1 = __importDefault(__webpack_require__(/*! classnames */ \"classnames\"));\r\nvar icons_1 = __webpack_require__(/*! ../icons */ \"./src/shared/icons/index.ts\");\r\nvar allIcons = {\r\n    comments: react_1.default.createElement(icons_1.CommentsIcon, null),\r\n    save: react_1.default.createElement(icons_1.SaveIcon, null),\r\n    share: react_1.default.createElement(icons_1.ShareIcon, null),\r\n    warning: react_1.default.createElement(icons_1.WarningIcon, null),\r\n    close: react_1.default.createElement(icons_1.CloseIcon, null),\r\n    menu: react_1.default.createElement(icons_1.MenuIcon, null),\r\n    anon: react_1.default.createElement(icons_1.IconAnon, null),\r\n};\r\nfunction Icon(props) {\r\n    var _a, _b, _c;\r\n    var _d = props.As, As = _d === void 0 ? \"span\" : _d, name = props.name, size = props.size, mobileSize = props.mobileSize, tableSize = props.tableSize, desktopSize = props.desktopSize, _e = props.color, color = _e === void 0 ? types_global_1.EColors.greyEC : _e;\r\n    var classes = (0, classnames_1.default)(icon_less_1.default[\"s\".concat(size)], icon_less_1.default[color], (_a = {}, _a[icon_less_1.default[\"m\".concat(mobileSize)]] = mobileSize, _a), (_b = {}, _b[icon_less_1.default[\"t\".concat(tableSize)]] = tableSize, _b), (_c = {}, _c[icon_less_1.default[\"d\".concat(desktopSize)]] = desktopSize, _c));\r\n    return (react_1.default.createElement(As, { className: classes }, allIcons[name]));\r\n}\r\nexports.Icon = Icon;\r\n\n\n//# sourceURL=webpack:///./src/shared/Icon/Icon.tsx?");
 
 /***/ }),
 
@@ -701,7 +771,7 @@ eval("\r\nvar __importDefault = (this && this.__importDefault) || function (mod)
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-eval("// Exports\nmodule.exports = {\n\t\"s28\": \"icon__s28--2IT_k\",\n\t\"s20\": \"icon__s20--3L3dU\",\n\t\"s16\": \"icon__s16--1tM1A\",\n\t\"s14\": \"icon__s14--3Rt_9\",\n\t\"s12\": \"icon__s12--1pqxy\",\n\t\"s10\": \"icon__s10--3k_1t\",\n\t\"black\": \"icon__black--UPuMm\",\n\t\"orange\": \"icon__orange--2kM3G\",\n\t\"green\": \"icon__green--3fkcF\",\n\t\"white\": \"icon__white--3MxAA\",\n\t\"grayF4\": \"icon__grayF4--1iSPQ\",\n\t\"greyF3\": \"icon__greyF3--QLx9S\",\n\t\"greyD9\": \"icon__greyD9--1Pwnz\",\n\t\"greyC4\": \"icon__greyC4--3FxbM\",\n\t\"grey99\": \"icon__grey99--25NRa\",\n\t\"grey66\": \"icon__grey66--2oU23\",\n\t\"upperCase\": \"icon__upperCase--1-4-U\",\n\t\"m28\": \"icon__m28--12Lch\",\n\t\"m20\": \"icon__m20--v6LMn\",\n\t\"m16\": \"icon__m16--3DF3Q\",\n\t\"m14\": \"icon__m14--3CJTL\",\n\t\"m12\": \"icon__m12--2JsMM\",\n\t\"m10\": \"icon__m10--2UzOd\",\n\t\"bold\": \"icon__bold--14xsU\",\n\t\"t28\": \"icon__t28--3ACB4\",\n\t\"t20\": \"icon__t20--ojWaY\",\n\t\"t16\": \"icon__t16--3pHxf\",\n\t\"t14\": \"icon__t14--3OzqL\",\n\t\"t12\": \"icon__t12--2S2WS\",\n\t\"t10\": \"icon__t10--ze7vB\",\n\t\"d28\": \"icon__d28--1zB7x\",\n\t\"d20\": \"icon__d20--2rsTz\",\n\t\"d16\": \"icon__d16--3hKS9\",\n\t\"d14\": \"icon__d14--2YbIt\",\n\t\"d12\": \"icon__d12--106mU\",\n\t\"d10\": \"icon__d10--ht6K_\"\n};\n\n\n//# sourceURL=webpack:///./src/shared/Icon/icon.less?");
+eval("// Exports\nmodule.exports = {\n\t\"s50\": \"icon__s50--3rEbU\",\n\t\"s28\": \"icon__s28--2IT_k\",\n\t\"s20\": \"icon__s20--3L3dU\",\n\t\"s16\": \"icon__s16--1tM1A\",\n\t\"s14\": \"icon__s14--3Rt_9\",\n\t\"s12\": \"icon__s12--1pqxy\",\n\t\"s10\": \"icon__s10--3k_1t\",\n\t\"black\": \"icon__black--UPuMm\",\n\t\"orange\": \"icon__orange--2kM3G\",\n\t\"green\": \"icon__green--3fkcF\",\n\t\"white\": \"icon__white--3MxAA\",\n\t\"grayF4\": \"icon__grayF4--1iSPQ\",\n\t\"greyF3\": \"icon__greyF3--QLx9S\",\n\t\"greyEC\": \"icon__greyEC--2vZiH\",\n\t\"greyD9\": \"icon__greyD9--1Pwnz\",\n\t\"greyC4\": \"icon__greyC4--3FxbM\",\n\t\"grey99\": \"icon__grey99--25NRa\",\n\t\"grey66\": \"icon__grey66--2oU23\",\n\t\"m28\": \"icon__m28--12Lch\",\n\t\"m20\": \"icon__m20--v6LMn\",\n\t\"m16\": \"icon__m16--3DF3Q\",\n\t\"m14\": \"icon__m14--3CJTL\",\n\t\"m12\": \"icon__m12--2JsMM\",\n\t\"m10\": \"icon__m10--2UzOd\",\n\t\"t28\": \"icon__t28--3ACB4\",\n\t\"t20\": \"icon__t20--ojWaY\",\n\t\"t16\": \"icon__t16--3pHxf\",\n\t\"t14\": \"icon__t14--3OzqL\",\n\t\"t12\": \"icon__t12--2S2WS\",\n\t\"t10\": \"icon__t10--ze7vB\",\n\t\"d28\": \"icon__d28--1zB7x\",\n\t\"d20\": \"icon__d20--2rsTz\",\n\t\"d16\": \"icon__d16--3hKS9\",\n\t\"d14\": \"icon__d14--2YbIt\",\n\t\"d12\": \"icon__d12--106mU\",\n\t\"d10\": \"icon__d10--ht6K_\"\n};\n\n\n//# sourceURL=webpack:///./src/shared/Icon/icon.less?");
 
 /***/ }),
 
@@ -811,6 +881,18 @@ eval("\r\nvar __importDefault = (this && this.__importDefault) || function (mod)
 
 /***/ }),
 
+/***/ "./src/shared/icons/IconAnon.tsx":
+/*!***************************************!*\
+  !*** ./src/shared/icons/IconAnon.tsx ***!
+  \***************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+eval("\r\nvar __importDefault = (this && this.__importDefault) || function (mod) {\r\n    return (mod && mod.__esModule) ? mod : { \"default\": mod };\r\n};\r\nObject.defineProperty(exports, \"__esModule\", { value: true });\r\nexports.IconAnon = void 0;\r\nvar react_1 = __importDefault(__webpack_require__(/*! react */ \"react\"));\r\nfunction IconAnon() {\r\n    return (react_1.default.createElement(\"svg\", { width: \"50\", height: \"50\", viewBox: \"0 0 50 50\", fill: \"none\", xmlns: \"http://www.w3.org/2000/svg\" },\r\n        react_1.default.createElement(\"path\", { d: \"M25 0C11.2 0 0 11.2 0 25C0 38.8 11.2 50 25 50C38.8 50 50 38.8 50 25C50 11.2 38.8 0 25 0ZM25 7.5C29.15 7.5 32.5 10.85 32.5 15C32.5 19.15 29.15 22.5 25 22.5C20.85 22.5 17.5 19.15 17.5 15C17.5 10.85 20.85 7.5 25 7.5ZM25 43C18.75 43 13.225 39.8 10 34.95C10.075 29.975 20 27.25 25 27.25C29.975 27.25 39.925 29.975 40 34.95C36.775 39.8 31.25 43 25 43Z\", fill: \"#D9D9D9\" })));\r\n}\r\nexports.IconAnon = IconAnon;\r\n\n\n//# sourceURL=webpack:///./src/shared/icons/IconAnon.tsx?");
+
+/***/ }),
+
 /***/ "./src/shared/icons/MenuIcon.tsx":
 /*!***************************************!*\
   !*** ./src/shared/icons/MenuIcon.tsx ***!
@@ -867,7 +949,7 @@ eval("\r\nvar __importDefault = (this && this.__importDefault) || function (mod)
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-eval("\r\nvar __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {\r\n    if (k2 === undefined) k2 = k;\r\n    var desc = Object.getOwnPropertyDescriptor(m, k);\r\n    if (!desc || (\"get\" in desc ? !m.__esModule : desc.writable || desc.configurable)) {\r\n      desc = { enumerable: true, get: function() { return m[k]; } };\r\n    }\r\n    Object.defineProperty(o, k2, desc);\r\n}) : (function(o, m, k, k2) {\r\n    if (k2 === undefined) k2 = k;\r\n    o[k2] = m[k];\r\n}));\r\nvar __exportStar = (this && this.__exportStar) || function(m, exports) {\r\n    for (var p in m) if (p !== \"default\" && !Object.prototype.hasOwnProperty.call(exports, p)) __createBinding(exports, m, p);\r\n};\r\nObject.defineProperty(exports, \"__esModule\", { value: true });\r\n__exportStar(__webpack_require__(/*! ./MenuIcon */ \"./src/shared/icons/MenuIcon.tsx\"), exports);\r\n__exportStar(__webpack_require__(/*! ./CommentsIcon */ \"./src/shared/icons/CommentsIcon.tsx\"), exports);\r\n__exportStar(__webpack_require__(/*! ./ShareIcon */ \"./src/shared/icons/ShareIcon.tsx\"), exports);\r\n__exportStar(__webpack_require__(/*! ./CloseIcon */ \"./src/shared/icons/CloseIcon.tsx\"), exports);\r\n__exportStar(__webpack_require__(/*! ./SaveIcon */ \"./src/shared/icons/SaveIcon.tsx\"), exports);\r\n__exportStar(__webpack_require__(/*! ./WarningIcon */ \"./src/shared/icons/WarningIcon.tsx\"), exports);\r\n\n\n//# sourceURL=webpack:///./src/shared/icons/index.ts?");
+eval("\r\nvar __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {\r\n    if (k2 === undefined) k2 = k;\r\n    var desc = Object.getOwnPropertyDescriptor(m, k);\r\n    if (!desc || (\"get\" in desc ? !m.__esModule : desc.writable || desc.configurable)) {\r\n      desc = { enumerable: true, get: function() { return m[k]; } };\r\n    }\r\n    Object.defineProperty(o, k2, desc);\r\n}) : (function(o, m, k, k2) {\r\n    if (k2 === undefined) k2 = k;\r\n    o[k2] = m[k];\r\n}));\r\nvar __exportStar = (this && this.__exportStar) || function(m, exports) {\r\n    for (var p in m) if (p !== \"default\" && !Object.prototype.hasOwnProperty.call(exports, p)) __createBinding(exports, m, p);\r\n};\r\nObject.defineProperty(exports, \"__esModule\", { value: true });\r\n__exportStar(__webpack_require__(/*! ./MenuIcon */ \"./src/shared/icons/MenuIcon.tsx\"), exports);\r\n__exportStar(__webpack_require__(/*! ./CommentsIcon */ \"./src/shared/icons/CommentsIcon.tsx\"), exports);\r\n__exportStar(__webpack_require__(/*! ./ShareIcon */ \"./src/shared/icons/ShareIcon.tsx\"), exports);\r\n__exportStar(__webpack_require__(/*! ./CloseIcon */ \"./src/shared/icons/CloseIcon.tsx\"), exports);\r\n__exportStar(__webpack_require__(/*! ./SaveIcon */ \"./src/shared/icons/SaveIcon.tsx\"), exports);\r\n__exportStar(__webpack_require__(/*! ./WarningIcon */ \"./src/shared/icons/WarningIcon.tsx\"), exports);\r\n__exportStar(__webpack_require__(/*! ./IconAnon */ \"./src/shared/icons/IconAnon.tsx\"), exports);\r\n\n\n//# sourceURL=webpack:///./src/shared/icons/index.ts?");
 
 /***/ }),
 
