@@ -1,0 +1,53 @@
+{
+  "name": "module-1",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "build:dev": "cross-env NODE_ENV=development webpack --config webpack.config.js",
+    "build:prod": "cross-env NODE_ENV=production webpack --config webpack.config.js",
+    "dev": "cross-env NODE_ENV=development node ./bin/dev.js",
+    "test": "jest"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@babel/plugin-syntax-jsx": "^7.21.4",
+    "@babel/preset-react": "^7.18.6",
+    "@hot-loader/react-dom": "^17.0.2",
+    "@types/classnames": "^2.3.1",
+    "@types/enzyme": "^3.10.12",
+    "@types/jest": "^29.5.0",
+    "@types/react": "^17.0.50",
+    "@wojtekmaj/enzyme-adapter-react-17": "^0.8.0",
+    "clean-webpack-plugin": "^4.0.0",
+    "cross-env": "^7.0.3",
+    "css-loader": "^3.4.2",
+    "enzyme": "^3.11.0",
+    "enzyme-to-json": "^3.6.2",
+    "html-webpack-plugin": "^4.5.2",
+    "identity-obj-proxy": "^3.0.0",
+    "jest": "^29.4.3",
+    "jest-environment-jsdom": "^29.5.0",
+    "less": "^3.13.1",
+    "less-loader": "^5.0.0",
+    "react-hot-loader": "^4.13.1",
+    "style-loader": "^1.1.3",
+    "ts-jest": "^29.1.0",
+    "ts-loader": "^6.2.1",
+    "typescript": "^4.6.4",
+    "webpack": "^4.42.0",
+    "webpack-cli": "^3.3.11",
+    "webpack-dev-middleware": "^3.7.3",
+    "webpack-dev-server": "^4.11.1",
+    "webpack-hot-middleware": "^2.25.0",
+    "webpack-node-externals": "^3.0.0"
+  },
+  "dependencies": {
+    "classnames": "^2.3.2",
+    "express": "^4.18.2",
+    "nodemon": "^2.0.20",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2"
+  },
+  "description": ""
+}
