@@ -5,9 +5,10 @@ import { SortBlock } from "./SortBlock";
 import styles from "./header.less";
 
 export function Header() {
+
   return (
     <header className={styles.header}>
-      <SearchBlock />
+      <SearchBlock/>
       <ThreadTitle />
       <SortBlock />
     </header>

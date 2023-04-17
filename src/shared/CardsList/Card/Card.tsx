@@ -5,11 +5,21 @@ import { Menu } from "./Menu";
 import { Preview } from "./Preview";
 import { TextContent } from "./TextContent";
 
-export function Card() {
+interface IPropsCard {
+  name: string;
+  avatar: string;
+  img: string;
+  title: string;
+}
+
+export function Card(props: IPropsCard) {
+  const { name, avatar, img, title } = props;
+
   return (
     <li className={styles.card}>
-      <TextContent />
-      <Preview />
+      <TextContent name={name} avatar={avatar} title={title} />
+
+      {(img.includes(".jpg") || img.includes(".png")) && <Preview img={img} />}
       <Menu />
       <Controls />
     </li>

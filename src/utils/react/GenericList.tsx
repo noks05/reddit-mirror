@@ -2,6 +2,7 @@ import React from "react";
 import { Icon } from "../../shared/Icon";
 import { EColors } from "../../shared/types.global";
 import { Text } from "../../shared/Text";
+import { Break } from "../../shared/Break";
 
 interface IItem {
   id: string;
@@ -27,11 +28,10 @@ export function GenericList({ list, classItem, classText, classDesktop }: IGener
           key={id}
           className={[classItem, desktop ? classDesktop : ''].join(' ').trim()}
         >
-          {img !== undefined && <Icon name={img} size={14}/>}
+          {img !== undefined && <Icon name={img} size={14} color={EColors.grey99} />}
 
-          <span className={classText}>
-            <Text children={text} size={14} color={EColors.grey66}/>
-          </span>
+          <Break size={8} />
+          <Text children={text} size={14} color={EColors.grey99} />
         </Item >
       ))
       }
