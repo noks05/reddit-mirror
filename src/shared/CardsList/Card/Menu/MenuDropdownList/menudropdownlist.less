@@ -4,11 +4,11 @@
 
 .dropdown {
   position: absolute;
-  right: 0;
-  top: 10px;
-  box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
   border-radius: 3px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
   background-color: #fff;
+  transform: translate(-50%, 40px);
+  z-index: 10;
 }
 
 .menuItem {
@@ -63,12 +63,19 @@
   color: #fff;
 }
 
-@media all and (max-width: 1024px) {
+@media all and (max-width: 1280px) {
   .closeButton {
     display: inline-block;
   }
+
   .menuItem {
-   padding: 10px 0;
+    padding: 10px 0;
+  }
+}
+
+@media all and (max-width: 1023px) {
+  .dropdown {
+    transform: translate(-90%, 30px);
   }
 }
 

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import styles from "./dropdown.less";
 
 interface IDropdownProps {
+  dropdownBox?: any;
   button: React.ReactNode;
   children: React.ReactNode;
   styleContainer?: string;
@@ -10,7 +11,7 @@ interface IDropdownProps {
   onClose?: () => void;
 }
 
-const NOOP = () => { };
+const NOOP = () => {};
 
 export function Dropdown({
   button,
@@ -31,12 +32,10 @@ export function Dropdown({
 
   return (
     <div className={styles.container}>
-      <div onClick={handleOpen}>
-        {button}
-      </div>
+      <div onClick={handleOpen}>{button}</div>
       {isDropdownOpen && (
         <div className={styles.listContainer}>
-          <div className={styles.list} onClick={() => setIsDropdownOpen(false)}          >
+          <div className={styles.list} onClick={() => setIsDropdownOpen(false)}>
             {children}
           </div>
         </div>

@@ -844,6 +844,13 @@
   "resolved" "https://registry.npmjs.org/@types/range-parser/-/range-parser-1.2.4.tgz"
   "version" "1.2.4"
 
+"@types/react-dom@^18.0.11":
+  "integrity" "sha512-O38bPbI2CWtgw/OoQoY+BRelw7uysmXbWvw3nLWO21H1HSh+GOlqPuXshJfjmpNlKiiSDG9cc1JZAaMmVdcTlw=="
+  "resolved" "https://registry.npmjs.org/@types/react-dom/-/react-dom-18.0.11.tgz"
+  "version" "18.0.11"
+  dependencies:
+    "@types/react" "*"
+
 "@types/react@*", "@types/react@^15.0.0 || ^16.0.0 || ^17.0.0", "@types/react@^17.0.50":
   "integrity" "sha512-Z13f9Qz7Hg8f2g2NsBjiJSVWmON2b3K8RIqFK8mMKCIgvD0CD0ZChTukz87H3lI28X3ukXoNFGzo3ZW1ICTtPA=="
   "resolved" "https://registry.npmjs.org/@types/react/-/react-17.0.56.tgz"

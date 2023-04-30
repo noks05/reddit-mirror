@@ -11,6 +11,7 @@ interface ITextProps {
   tableSize?: TSizes;
   desktopSize?: TSizes;
   color?: EColors;
+  userClass?: string;
 }
 
 export function Text(props: ITextProps) {
@@ -22,6 +23,7 @@ export function Text(props: ITextProps) {
     mobileSize,
     tableSize,
     desktopSize,
+    userClass = "",
   } = props;
 
   const classes = classNames(
@@ -32,9 +34,5 @@ export function Text(props: ITextProps) {
     { [styles[`d${desktopSize}`]]: desktopSize }
   );
 
-  return (
-    <As className={classes}>
-      {children}
-    </As>
-  );
+  return <As className={[classes, userClass].join(" ").trim()}>{children}</As>;
 }

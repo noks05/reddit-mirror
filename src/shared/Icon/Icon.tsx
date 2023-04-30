@@ -4,12 +4,14 @@ import { EColors, TSizes } from "../types.global";
 import classNames from "classnames";
 import {
   CloseIcon,
+  CloseIconX,
   CommentsIcon,
   MenuIcon,
   SaveIcon,
   ShareIcon,
   WarningIcon,
   IconAnon,
+  RainbowIcon,
 } from "../icons";
 
 interface IIconsObject {
@@ -22,18 +24,23 @@ const allIcons: IIconsObject = {
   share: <ShareIcon />,
   warning: <WarningIcon />,
   close: <CloseIcon />,
+  closeX: <CloseIconX />,
   menu: <MenuIcon />,
   anon: <IconAnon />,
+  rainbow: <RainbowIcon />,
 };
 
-// export enum EIcons {
-//   comments = "comments",
-//   save = "save",
-//   share = "share",
-//   warning = "warning",
-//   close = "close",
-//   menu = "menu",
-// }
+export enum EIcons {
+  comments = "comments",
+  save = "save",
+  share = "share",
+  warning = "warning",
+  close = "close",
+  closeX = "closeX",
+  menu = "menu",
+  anon = "anon",
+  rainbow = "rainbow",
+}
 
 interface IIconProps {
   As?: "div" | "span";
@@ -44,6 +51,7 @@ interface IIconProps {
   tableSize?: TSizes;
   desktopSize?: TSizes;
   color?: EColors;
+  userClass?: string;
 }
 
 export function Icon(props: IIconProps) {
@@ -55,6 +63,7 @@ export function Icon(props: IIconProps) {
     tableSize,
     desktopSize,
     color = EColors.greyEC,
+    userClass,
   } = props;
 
   const classes = classNames(
@@ -66,8 +75,6 @@ export function Icon(props: IIconProps) {
   );
 
   return (
-    <As className={classes}>
-      {allIcons[name]}
-    </As>
+    <As className={[classes, userClass].join(" ").trim()}>{allIcons[name]}</As>
   );
 }

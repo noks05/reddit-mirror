@@ -1,5 +1,6 @@
 import React from "react";
 import styles from "./textcontent.less";
+import { Comments } from "../Comments";
 
 interface IPropsTextContent {
   name: string;
@@ -10,6 +11,8 @@ interface IPropsTextContent {
 export function TextContent({ name, avatar, title }: IPropsTextContent) {
   return (
     <div className={styles.textContent}>
+      <Comments></Comments>
+
       <div className={styles.metaData}>
         <div className={styles.userLink}>
           <img

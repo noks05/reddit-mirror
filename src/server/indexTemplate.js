@@ -10,10 +10,15 @@ export const indexTemplate = (content, token) => `
     <script>
       window.__token__ = '${token}';
     </script>
+    <style>
+      // #portal-root{
+      //   position: absolute;
+      // }
+    </style>
 </head>
 <body>
     <div id="react-root">${content}</div>
-
+    <div id="portal-root"></div>
 </body>
 </html>
 `;

@@ -1,5 +1,4 @@
 import React from "react";
-import { useUserData } from "../../hooks/useUserData";
 import { usePostsData } from "../../hooks/usePostsData";
 
 interface IPropsPostsContextProvider {

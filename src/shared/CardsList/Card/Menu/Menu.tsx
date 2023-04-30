@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef, useState } from "react";
 import { Dropdown } from "../../../Dropdown";
 import { generateId } from "../../../../utils/react/generateRandomIndex";
 import { MenuIcon } from "../../../icons";
@@ -7,36 +7,58 @@ import styles from "./menu.less";
 
 const items = [
   {
-    img: 'comments',
+    img: "comments",
     text: "Комментарии",
-    desktop: true
+    desktop: true,
   },
   {
-    img: 'share',
+    img: "share",
     text: "Поделиться",
-    desktop: true
+    desktop: true,
   },
   {
-    img: 'close',
+    img: "close",
     text: "Скрыть",
-    desktop: false
+    desktop: false,
   },
   {
-    img: 'save',
+    img: "save",
     text: "Сохранить",
-    desktop: true
+    desktop: true,
   },
   {
-    img: 'warning',
+    img: "warning",
     text: "Пожаловаться",
-    desktop: false
+    desktop: false,
   },
 ].map((obj) => generateId(obj));
 
 export function Menu() {
+  let [coordinates, setСoordinates] = useState({ top: 0, left: 0 });
+
+  function getPosition(e: React.MouseEvent<HTMLDivElement, MouseEvent>) {
+    let x = 0;
+    let y = 0;
+
+    if (e.pageX || e.pageY) {
+      x = e.pageX;
+      y = e.pageY;
+    } else if (e.clientX || e.clientY) {
+      x =
+        e.clientX +
+        document.body.scrollLeft +
+        document.documentElement.scrollLeft;
+      y =
+        e.clientY +
+        document.body.scrollTop +
+        document.documentElement.scrollTop;
+    }
+
+    setСoordinates({ top: y, left: x });
+  }
 
   return (
-    <div className={styles.menu}>
+    <div className={styles.menu} onClick={(e) => getPosition(e)}>
       <Dropdown
         button={
           <button className={styles.menuButton}>
@@ -44,7 +66,7 @@ export function Menu() {
           </button>
         }
       >
-        <MenuDropdownList items={items} />
+        <MenuDropdownList items={items} coordinates={coordinates} />
       </Dropdown>
     </div>
   );

@@ -2,6 +2,8 @@ export * from './MenuIcon';
 export * from './CommentsIcon';
 export * from './ShareIcon';
 export * from './CloseIcon';
+export * from './CloseIconX';
 export * from './SaveIcon';
 export * from './WarningIcon';
 export * from './IconAnon';
+export * from './RainbowIcon';
