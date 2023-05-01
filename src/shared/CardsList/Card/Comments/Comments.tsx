@@ -1,53 +1,38 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useRef, useState } from "react";
 import styles from "./comments.less";
 import { EIcons, Icon } from "../../../Icon";
 import { Break } from "../../../Break";
 import { Text } from "../../../Text";
 import { EColors } from "../../../types.global";
 import { ListComments } from "./ListComments";
+import { useCommentsData } from "../../../../hooks/useCommentsData";
+import { useChangePadding } from "../../../../hooks/useChangePadding";
 
 export function Comments() {
   let [isActive, setIsActive] = useState(false);
   const refBtn = useRef<null | HTMLButtonElement>(null);
+  const [postId, setPostId] = useState<string>("");
+  const [isMore, setIsMore] = useState<boolean>(false);
 
-  function changePaddingBottom(btn: HTMLButtonElement | null, state: boolean) {
-    if (!btn) return null;
+  function openComments(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
+    setIsActive(!isActive);
+    setIsMore(false);
 
-    const li = btn.closest("[class^=card__card--]");
-    if (!li) return null;
-    if (state) {
-      addPaddingBottom(btn, li);
-    } else {
-      removePaddingBottom(li);
-    }
+    if (!isActive) return;
+    const id = (e.target as HTMLElement).closest("[class^=card__card--]")?.id;
+    setPostId(id ? id : "");
   }
 
-  function addPaddingBottom(btn: HTMLButtonElement, li: Element) {
-    const container = btn.parentNode;
-    const heightContr = (
-      container?.lastChild as HTMLElement
-    ).getBoundingClientRect().height;
+  const [data] = useCommentsData(postId);
 
-    const heightBtn = btn.getBoundingClientRect().height;
-    const castomPadding = heightContr - heightBtn;
-    if (li) (li as HTMLElement).style.paddingBottom = castomPadding + 50 + "px";
-  }
-
-  function removePaddingBottom(li: Element) {
-    const paddingTop = (li as HTMLElement).style.paddingTop;
-    if (li) (li as HTMLElement).style.paddingBottom = paddingTop;
-  }
-
-  useEffect(() => {
-    changePaddingBottom(refBtn.current, isActive);
-  }, [isActive]);
+  useChangePadding(refBtn.current, isActive, isMore);
 
   return (
     <div className={styles.container}>
       <button
         type="button"
         className={styles.button}
-        onClick={() => setIsActive(!isActive)}
+        onClick={(e) => openComments(e)}
         ref={refBtn}
       >
         <Icon
@@ -64,8 +49,11 @@ export function Comments() {
 
       {isActive && (
         <ListComments
+          data={data}
           isActive={isActive}
           setIsActive={setIsActive}
+          isMore={isMore}
+          setIsMore={setIsMore}
         ></ListComments>
       )}
     </div>

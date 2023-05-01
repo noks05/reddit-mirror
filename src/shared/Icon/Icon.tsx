@@ -43,9 +43,9 @@ export enum EIcons {
 }
 
 interface IIconProps {
-  As?: "div" | "span";
-  children?: string;
-  name: string;
+  As?: "div" | "span" | "img";
+  children?: string | React.ReactNode;
+  name?: string;
   size?: TSizes;
   mobileSize?: TSizes;
   tableSize?: TSizes;
@@ -64,6 +64,7 @@ export function Icon(props: IIconProps) {
     desktopSize,
     color = EColors.greyEC,
     userClass,
+    children,
   } = props;
 
   const classes = classNames(
@@ -75,6 +76,8 @@ export function Icon(props: IIconProps) {
   );
 
   return (
-    <As className={[classes, userClass].join(" ").trim()}>{allIcons[name]}</As>
+    <As className={[classes, userClass].join(" ").trim()}>
+      {name ? allIcons[name] : children}
+    </As>
   );
 }

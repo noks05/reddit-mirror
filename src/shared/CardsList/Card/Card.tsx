@@ -4,7 +4,6 @@ import { Controls } from "./Controls";
 import { Menu } from "./Menu";
 import { Preview } from "./Preview";
 import { TextContent } from "./TextContent";
-import { useCommentsData } from "../../../hooks/useCommentsData";
 
 interface IPropsCard {
   id: string;
@@ -16,7 +15,6 @@ interface IPropsCard {
 
 export function Card(props: IPropsCard) {
   const { id, name, avatar, img, title } = props;
-  const e = useCommentsData(id);
 
   return (
     <li className={styles.card} id={id}>

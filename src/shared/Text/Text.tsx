@@ -5,7 +5,7 @@ import { TSizes, EColors } from "../types.global";
 
 interface ITextProps {
   As?: "span" | "h1" | "h2" | "h3" | "h4" | "h5" | "p" | "div";
-  children?: string;
+  children?: string | string[];
   size: TSizes;
   mobileSize?: TSizes;
   tableSize?: TSizes;
