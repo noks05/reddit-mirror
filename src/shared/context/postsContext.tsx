@@ -7,6 +7,7 @@ interface IPropsPostsContextProvider {
 interface IPostContextData {
   data: {
     id: string;
+    subreddit: string;
     author: string;
     sr_detail: {
       icon_img: string;

@@ -1,0 +1,31 @@
+.button {
+  position: relative;
+  display: flex;
+  align-items: center;
+  padding-top: 11px;
+  z-index: 2;
+}
+
+.buttonOff {
+  pointer-events: none;
+}
+
+.button svg path {
+  transition: fill 0.2s ease-in-out;
+}
+
+.button:hover svg path {
+  fill: #CC6633;
+}
+
+.button span {
+  transition: color 0.2s ease-in-out;
+}
+
+.button:hover span {
+  color: #CC6633;
+}
+
+.button span:last-of-type {
+  padding-bottom: 4px;
+}

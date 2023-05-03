@@ -1,0 +1,47 @@
+.container {
+  overflow: hidden;
+}
+
+.input {
+  display: block;
+  width: 100%;
+  min-height: 89px;
+  padding: 16px 18px;
+  border: 1px solid #D9D9D9;
+  border-radius: 3px 3px 0px 0px;
+  resize: none;
+}
+
+.input::placeholder {
+  font-family: 'Roboto', 'sans-serif';
+  font-weight: 400;
+  font-size: 15px;
+  line-height: 19px;
+  color: #999;
+}
+
+.input:focus {
+  color: #CC6633;
+  outline: none;
+}
+
+.toolsBox {
+  display: flex;
+}
+
+.tools {
+  flex-grow: 1;
+  padding: 15px 19px;
+  background-color: #E5E5E5;
+}
+
+.button {
+  padding: 17px 50px;
+  background-color: #CC6633;
+  color: #fff;
+  transition: background-color .2s ease-in-out;
+}
+
+.button:hover {
+  background-color: #e1a07f;
+}

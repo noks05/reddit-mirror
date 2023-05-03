@@ -15,6 +15,7 @@ export function CardsList() {
           <Card
             key={p.data.id}
             id={p.data.id}
+            subreddit={p.data.subreddit}
             img={p.data.url}
             name={p.data.author}
             avatar={p.data.sr_detail.icon_img}

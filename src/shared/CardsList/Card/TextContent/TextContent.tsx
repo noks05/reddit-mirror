@@ -6,12 +6,20 @@ interface IPropsTextContent {
   name: string;
   avatar: string;
   title: string;
+  id: string;
+  subreddit: string;
 }
 
-export function TextContent({ name, avatar, title }: IPropsTextContent) {
+export function TextContent({
+  id,
+  subreddit,
+  name,
+  avatar,
+  title,
+}: IPropsTextContent) {
   return (
     <div className={styles.textContent}>
-      <Comments></Comments>
+      <Comments postId={id} subreddit={subreddit}></Comments>
 
       <div className={styles.metaData}>
         <div className={styles.userLink}>

@@ -5,6 +5,7 @@ import axios from "axios";
 interface IPost {
   data: {
     id: string;
+    subreddit: string;
     author: string;
     sr_detail: {
       icon_img: string;

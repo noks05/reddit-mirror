@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React from "react";
 import styles from "./card.less";
 import { Controls } from "./Controls";
 import { Menu } from "./Menu";
@@ -7,6 +7,7 @@ import { TextContent } from "./TextContent";
 
 interface IPropsCard {
   id: string;
+  subreddit: string;
   name: string;
   avatar: string;
   img: string;
@@ -14,11 +15,17 @@ interface IPropsCard {
 }
 
 export function Card(props: IPropsCard) {
-  const { id, name, avatar, img, title } = props;
+  const { id, subreddit, name, avatar, img, title } = props;
 
   return (
-    <li className={styles.card} id={id}>
-      <TextContent name={name} avatar={avatar} title={title} />
+    <li className={styles.card}>
+      <TextContent
+        name={name}
+        avatar={avatar}
+        title={title}
+        id={id}
+        subreddit={subreddit}
+      />
       {(img.includes(".jpg") || img.includes(".png")) && <Preview img={img} />}
       <Menu />
       <Controls />
