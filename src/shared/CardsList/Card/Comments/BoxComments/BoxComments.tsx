@@ -5,18 +5,14 @@ import { EColors } from "../../../../types.global";
 import { ListComments } from "./ListComments";
 
 interface IPropsListComments {
-  data: IComment[];
   isActive: boolean;
   isMore: boolean;
   setIsActive: (isActive: boolean) => void;
   setIsMore: (isMore: boolean) => void;
 }
 
-interface IComment {
-  data: { id: string; author: string; selftext: string; link_url: string };
-}
 export function BoxComments(props: IPropsListComments) {
-  const { data, isMore, setIsMore, isActive, setIsActive } = props;
+  const { isActive, setIsActive } = props;
 
   return (
     <div className={styles.listBox}>
@@ -30,17 +26,12 @@ export function BoxComments(props: IPropsListComments) {
         className={styles.close}
         onClick={() => {
           setIsActive(!isActive);
-          setIsMore(false);
         }}
       >
         <Icon name={EIcons.closeX} size={14} color={EColors.greyC4}></Icon>
       </button>
 
-      <ListComments
-        data={data}
-        isMore={isMore}
-        setIsMore={setIsMore}
-      ></ListComments>
+      <ListComments></ListComments>
     </div>
   );
 }

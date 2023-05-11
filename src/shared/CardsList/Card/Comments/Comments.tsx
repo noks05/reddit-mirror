@@ -4,6 +4,7 @@ import { BoxComments } from "./BoxComments";
 import { useCommentsData } from "../../../../hooks/useCommentsData";
 import { useChangePadding } from "../../../../hooks/useChangePadding";
 import { BtnActiveComments } from "./BtnActiveComments";
+import { commentsContext } from "../../../context/commentsContext";
 
 export function Comments({
   postId,
@@ -12,32 +13,56 @@ export function Comments({
   postId: string;
   subreddit: string;
 }) {
-  let [isActive, setIsActive] = useState(false);
+  const [isActive, setIsActive] = useState(false);
+  const [isMore, setIsMore] = useState(false);
+  const [isClick, setIsClick] = useState(false);
   const refBtn = useRef<null | HTMLDivElement>(null);
-  const [isMore, setIsMore] = useState<boolean>(false);
 
   let [data] = useCommentsData(postId, subreddit);
-  useChangePadding(refBtn.current, isActive, isMore, data);
-  // data = [...data, ...data, ...data];
+  const { Provider } = commentsContext;
+
+  useChangePadding(data, refBtn.current, isActive, isClick);
+  function fixesClick(event: React.MouseEvent<HTMLDivElement, MouseEvent>) {
+    if (event.target instanceof Element) {
+      const form = event.target?.closest(
+        "[class^=boxformreasponse__container--]"
+      );
+      if (form) return;
+      setIsClick(!isClick);
+    }
+  }
 
   return (
-    <div className={styles.container} ref={refBtn}>
-      <BtnActiveComments
-        data={data}
-        isActive={isActive}
-        setIsMore={setIsMore}
-        setIsActive={setIsActive}
-      ></BtnActiveComments>
-
-      {isActive && (
-        <BoxComments
+    <Provider
+      value={{
+        data,
+        isMore,
+        isActive,
+        setIsMore,
+        refBtnCurrent: refBtn.current,
+      }}
+    >
+      <div
+        className={styles.container}
+        ref={refBtn}
+        onClick={(e) => fixesClick(e)}
+      >
+        <BtnActiveComments
           data={data}
           isActive={isActive}
-          setIsActive={setIsActive}
-          isMore={isMore}
           setIsMore={setIsMore}
-        ></BoxComments>
-      )}
-    </div>
+          setIsActive={setIsActive}
+        ></BtnActiveComments>
+
+        {isActive && (
+          <BoxComments
+            isActive={isActive}
+            setIsActive={setIsActive}
+            isMore={isMore}
+            setIsMore={setIsMore}
+          ></BoxComments>
+        )}
+      </div>
+    </Provider>
   );
 }

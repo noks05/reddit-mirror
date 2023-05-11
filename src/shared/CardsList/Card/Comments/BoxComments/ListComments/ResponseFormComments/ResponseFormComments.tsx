@@ -5,7 +5,7 @@ import { EColors } from "../../../../../../types.global";
 
 export function ResponseFormComments({ nameAutor }: { nameAutor: string }) {
   const inputRef = useRef<HTMLTextAreaElement | null>(null);
-  const [inputValue, setInputValue] = useState(`${nameAutor}, `);
+  let [inputValue, setInputValue] = useState(`${nameAutor}, `);
 
   useEffect(() => {
     const inputElem = inputRef.current;
@@ -15,21 +15,21 @@ export function ResponseFormComments({ nameAutor }: { nameAutor: string }) {
     }
   }, []);
 
-  console.log(inputValue);
-
   return (
     <form className={styles.container} action="">
-      <textarea
+      {/* неконтролируемая компонента */}
+      {/* <textarea
         className={styles.input}
         ref={inputRef}
-        defaultValue={`${nameAutor}, `}
-      />
-      {/* <textarea
+        defaultValue={inputValue}
+      /> */}
+      {/* контролируемая компонента */}
+      <textarea
         className={styles.input}
         ref={inputRef}
         value={inputValue}
         onChange={(e) => setInputValue(e.currentTarget.value)}
-      /> */}
+      />
       <div className={styles.toolsBox}>
         <div className={styles.tools}>tools</div>
         <button
