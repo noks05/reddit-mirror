@@ -31,8 +31,9 @@ export function MenuDropdownList({ items, coordinates }: IContentProps) {
     <div className={styles.dropdown} style={positionDropdown}>
       <ul className={styles.menuItemsList}>
         <GenericList
-          list={items}
-          classItem={styles.menuItem}
+          As="li"
+          data={items}
+          userClass={styles.menuItem}
           classDesktop={styles.desktop}
         />
       </ul>

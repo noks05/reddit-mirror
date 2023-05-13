@@ -11,9 +11,11 @@ interface IPostContextData {
     author: string;
     sr_detail: {
       icon_img: string;
+      description: string;
     };
     url: string;
     title: string;
+    score: string;
   };
 }
 interface IPostsContextData {

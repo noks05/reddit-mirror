@@ -1,14 +1,14 @@
 import React, { useContext, useState } from "react";
-import styles from "./boxformreasponse.less";
+import styles from "./boxformcomments.less";
 import { EIcons, Icon } from "../../../../../../../Icon";
 import { Break } from "../../../../../../../Break";
 import { Text } from "../../../../../../../Text";
 import { EColors } from "../../../../../../../types.global";
-import { ResponseFormComments } from "../../ResponseFormComments";
+import { FormComments } from "../../FormComments";
 import { commentsContext } from "../../../../../../../context/commentsContext";
 import { useChangePadding } from "../../../../../../../../hooks/useChangePadding";
 
-export function BoxFormReasponse({ author }: { author: string }) {
+export function BoxFormComments({ author }: { author: string }) {
   const [isForm, setIsForm] = useState(false);
   const { data, refBtnCurrent, isActive } = useContext(commentsContext);
   useChangePadding(data, refBtnCurrent, isActive, isForm);
@@ -20,7 +20,6 @@ export function BoxFormReasponse({ author }: { author: string }) {
         className={styles.button}
         onClick={() => {
           setIsForm(!isForm);
-          console.log(" ew");
         }}
       >
         <Icon name={EIcons.comments} color={EColors.grey99} size={14}></Icon>
@@ -30,9 +29,7 @@ export function BoxFormReasponse({ author }: { author: string }) {
         </Text>
       </button>
 
-      {isForm && (
-        <ResponseFormComments nameAutor={author}></ResponseFormComments>
-      )}
+      {isForm && <FormComments nameAutor={author}></FormComments>}
     </div>
   );
 }

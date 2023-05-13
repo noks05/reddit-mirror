@@ -1,21 +1,37 @@
 import React from "react";
 import styles from "./comment.less";
-import { EIcons, Icon } from "../../../../../../Icon";
 import { Text } from "../../../../../../Text";
-import { Break } from "../../../../../../Break";
 import { EColors } from "../../../../../../types.global";
-import { BoxFormReasponse } from "./BoxFormReasponse";
+import { MetaData } from "../../../../TextContent/MetaData";
+import { GenericList } from "../../../../../../../utils/react/GenericList";
+import { generateId } from "../../../../../../../utils/react/generateRandomIndex";
 
 export function Comment({ comment }: { comment: any }) {
+  const data = [
+    {
+      img: "comments",
+      text: "Ответить",
+      desktop: true,
+    },
+    {
+      img: "share",
+      text: "Поделиться",
+      desktop: true,
+    },
+    {
+      img: "warning",
+      text: "Пожаловаться",
+      desktop: true,
+    },
+  ].map((obj) => generateId(obj));
+
   return (
     <>
-      <div className={styles.user}>
-        <Icon name={EIcons.anon} size={20}></Icon>
-        <Break size={8}></Break>
-        <Text size={14} color={EColors.orange}>
-          {comment.data.author}
-        </Text>
-      </div>
+      <MetaData
+        name={comment.author}
+        avatar={""}
+        subreddit={comment.subreddit}
+      />
 
       <Text
         size={14}
@@ -23,10 +39,12 @@ export function Comment({ comment }: { comment: any }) {
         As="p"
         userClass={[styles.lineHeight24, styles.textBody].join(" ")}
       >
-        {comment.data.selftext}
+        {comment.data.body}
       </Text>
 
-      <BoxFormReasponse author={comment.data.author} />
+      <ul className={styles.list}>
+        <GenericList As="li" data={data} userClass={styles.item} />
+      </ul>
     </>
   );
 }

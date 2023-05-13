@@ -9,9 +9,11 @@ interface IPost {
     author: string;
     sr_detail: {
       icon_img: string;
+      description: string;
     };
     url: string;
     title: string;
+    score: string;
   };
 }
 
@@ -32,6 +34,7 @@ export function usePostsData() {
         })
         .then((resp) => {
           const postsData = resp.data.data.children;
+          console.log(resp.data.data.children);
           setData({ posts: postsData });
         })
         .catch(console.log);

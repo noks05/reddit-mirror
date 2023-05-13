@@ -76,7 +76,7 @@ export function Icon(props: IIconProps) {
   );
 
   return (
-    <As className={[classes, userClass].join(" ").trim()}>
+    <As className={[classes, userClass, styles.defaultFlex].join(" ").trim()}>
       {name ? allIcons[name] : children}
     </As>
   );

@@ -1,29 +1,30 @@
 import { useContext, useEffect, useState } from "react";
 import axios from "axios";
-import { tokenContext } from "../shared/context/tokenContext";
 
-export function useCommentsData(postId?: string, subreddit?: string) {
-  const [data, setData] = useState([]);
+interface ICommentsData {
+  data: {
+    id: string;
+    author: string;
+    body: string;
+  };
+}
 
-  const token = useContext(tokenContext);
+export function useCommentsData(postId: string, subreddit: string) {
+  const [data, setData] = useState<ICommentsData[]>([]);
 
   useEffect(() => {
-    const result1 = postId !== undefined;
-    const result2 = subreddit !== undefined;
-    const result3 = token !== "" && token !== "undefined";
+    axios
+      .get(`http://api.reddit.com/r/${subreddit}/comments/${postId}`)
+      .then((resp) => {
+        const commentsData = resp.data[1].data.children;
+        console.log(resp.data[1].data.children);
+        setData(commentsData);
+      })
+      .catch((e) => {
+        setData([]);
+        console.log(e);
+      });
 
-    if (result1 && result2 && result3) {
-      axios
-        .get(`http://api.reddit.com/r/${subreddit}/comments/${postId}?limit=25`)
-        .then((resp) => {
-          const commentsData = resp.data[0].data.children;
-          setData(commentsData);
-        })
-        .catch((e) => {
-          setData([]);
-          console.log(e);
-        });
-    }
     return () => {
       setData([]);
     };

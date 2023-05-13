@@ -18,14 +18,15 @@ export function Comments({
   const [isClick, setIsClick] = useState(false);
   const refBtn = useRef<null | HTMLDivElement>(null);
 
-  let [data] = useCommentsData(postId, subreddit);
+  const [data] = useCommentsData(postId, subreddit);
   const { Provider } = commentsContext;
 
   useChangePadding(data, refBtn.current, isActive, isClick);
   function fixesClick(event: React.MouseEvent<HTMLDivElement, MouseEvent>) {
+    event.stopPropagation();
     if (event.target instanceof Element) {
       const form = event.target?.closest(
-        "[class^=boxformreasponse__container--]"
+        "[class^=boxformcomments__container--]"
       );
       if (form) return;
       setIsClick(!isClick);

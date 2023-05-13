@@ -1,0 +1,92 @@
+.metaData {
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+  margin-bottom: 10px;
+  font-size: 10px;
+  line-height: 12px;
+}
+
+
+.subreddit {
+  padding: 2px 10px 4px;
+  background-color: #d9d9d9;
+}
+
+.publishedLabel {
+  display: none;
+}
+
+.createdAt,
+.createdAt span {
+  color: hsl(0, 0%, 60%);
+}
+
+@media all and (min-width: 1024px) {
+
+  .metaData {
+    flex-flow: row-reverse nowrap;
+    justify-content: flex-end;
+    font-size: 14px;
+    line-height: 16px;
+  }
+
+  .publishedLabel {
+    display: inline;
+  }
+}
+
+
+
+.username {
+  display: none;
+}
+
+@media all and (min-width: 320px) {
+  .username {
+    display: flex;
+  }
+}
+
+
+// userLink
+.userLink {
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+  height: 20px;
+  padding: 0 6px 0 0;
+}
+
+.avatar {
+  border-radius: 20px;
+  width: 20px;
+  height: 20px;
+  margin: 0 7px 0 0;
+}
+
+.username {
+  color: #cc6633;
+  position: relative;
+  z-index: 1;
+}
+
+@media all and (min-width: 1024px) {
+  .userLink {
+    padding: 0 0 0 5px;
+  }
+}
+
+@media all and (min-width: 1024px) {
+  .userLink:hover a {
+    text-decoration: underline;
+  }
+}
+
+
+@media all and (min-width: 1024px) {
+
+  .metaData {
+    padding: 0;
+  }
+}

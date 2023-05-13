@@ -15,10 +15,7 @@ export function ListComments() {
     <>
       <ul>
         {curData.map((comment) => (
-          <li
-            className={styles.commentBox}
-            key={comment.data.id + Math.random()}
-          >
+          <li className={styles.commentBox} key={comment.data.id}>
             <Comment comment={comment} />
           </li>
         ))}

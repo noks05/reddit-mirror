@@ -1,46 +1,38 @@
-// karmaCounter
-.karmaCounter>*+* {
-    padding: 0 0 0 4px;
+.up,
+.down {
+  display: flex;
+}
+
+.karmaValue {
+  color: hsl(0, 0%, 77%);
+}
+
+svg.down {
+  transform: rotate(180deg);
+}
+
+@media all and (min-width: 1024px) {
+  .karmaCounter {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-flow: column nowrap;
   }
-  
+
   .karmaValue {
-    color: hsl(0, 0%, 77%);
-    font-size: 12px;
-    line-height: 14px;
+    padding: 7px 0;
+    font-size: 14px;
+    line-height: 16px;
+    color: #000;
   }
-  
-  svg.down {
-    transform: rotate(180deg);
+}
+
+@media all and (min-width: 1024px) {
+  .karmaCounter>button.up:hover>svg>path {
+    fill: #A4CC33;
   }
-  
-  @media all and (min-width: 1024px) {
-    .karmaCounter {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-flow: column nowrap;
-    }
-  
-    .karmaCounter>*+* {
-      padding: 7px 0 0;
-    }
-  
-    .karmaValue {
-      font-size: 14px;
-      line-height: 16px;
-      color: #000;
-    }
+
+  .karmaCounter>button.down:hover>svg>path {
+    fill: #CC6633;
   }
-  
-  @media all and (min-width: 1024px) {
-    .karmaCounter>button.up:hover>svg>path {
-      fill: #A4CC33;
-    }
-  
-    .karmaCounter>button.down:hover>svg>path {
-      fill: #CC6633;
-    }
-  }
-  
-  
-  
+}

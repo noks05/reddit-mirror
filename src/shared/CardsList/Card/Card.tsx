@@ -12,23 +12,31 @@ interface IPropsCard {
   avatar: string;
   img: string;
   title: string;
+  score: string;
+  clickHandler: (curTarget: HTMLElement) => void;
 }
 
 export function Card(props: IPropsCard) {
-  const { id, subreddit, name, avatar, img, title } = props;
+  const { id, subreddit, name, avatar, img, title, score, clickHandler } =
+    props;
 
   return (
-    <li className={styles.card}>
+    <li
+      className={styles.card}
+      id={id}
+      onClick={(e) => clickHandler(e.currentTarget)}
+    >
       <TextContent
         name={name}
         avatar={avatar}
         title={title}
         id={id}
         subreddit={subreddit}
+        commented={true}
       />
       {(img.includes(".jpg") || img.includes(".png")) && <Preview img={img} />}
       <Menu />
-      <Controls />
+      <Controls score={score} />
     </li>
   );
 }

@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useState } from "react";
 import { Dropdown } from "../../../Dropdown";
 import { generateId } from "../../../../utils/react/generateRandomIndex";
 import { MenuIcon } from "../../../icons";
@@ -37,6 +37,7 @@ export function Menu() {
   let [coordinates, setСoordinates] = useState({ top: 0, left: 0 });
 
   function getPosition(e: React.MouseEvent<HTMLDivElement, MouseEvent>) {
+    e.stopPropagation();
     let x = 0;
     let y = 0;
 

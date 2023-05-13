@@ -1,9 +1,9 @@
 import React, { useEffect, useRef, useState } from "react";
-import styles from "./responseformcomments.less";
+import styles from "./formcomments.less";
 import { Text } from "../../../../../../Text";
 import { EColors } from "../../../../../../types.global";
 
-export function ResponseFormComments({ nameAutor }: { nameAutor: string }) {
+export function FormComments({ nameAutor }: { nameAutor: string }) {
   const inputRef = useRef<HTMLTextAreaElement | null>(null);
   let [inputValue, setInputValue] = useState(`${nameAutor}, `);
 
