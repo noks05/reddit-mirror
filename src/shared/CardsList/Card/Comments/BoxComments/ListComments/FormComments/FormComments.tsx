@@ -1,17 +1,31 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { RefObject, useEffect, useRef, useState } from "react";
 import styles from "./formcomments.less";
-import { Text } from "../../../../../../Text";
+import { Text } from "../../../../../../glop/Text";
 import { EColors } from "../../../../../../types.global";
+import { Icon } from "../../../../../../glop/Icon";
 
 export function FormComments({ nameAutor }: { nameAutor: string }) {
   const inputRef = useRef<HTMLTextAreaElement | null>(null);
-  let [inputValue, setInputValue] = useState(`${nameAutor}, `);
+  const [inputValue, setInputValue] = useState(`${nameAutor}, `);
+  const inconsArr: string[] = [
+    "arrows",
+    "picture",
+    "file",
+    "download",
+    "avatar",
+    "reload",
+    "link",
+    "pen",
+    "underline",
+    "pdf",
+  ];
 
   useEffect(() => {
-    const inputElem = inputRef.current;
-    if (inputRef && inputElem) {
-      inputElem.focus();
-      inputElem.selectionStart = inputElem.value.length;
+    if (inputRef) {
+      const inputHtmlElem = inputRef.current;
+      if (!inputHtmlElem) return;
+      inputHtmlElem.focus();
+      inputHtmlElem.selectionStart = inputHtmlElem.value.length;
     }
   }, []);
 
@@ -31,7 +45,15 @@ export function FormComments({ nameAutor }: { nameAutor: string }) {
         onChange={(e) => setInputValue(e.currentTarget.value)}
       />
       <div className={styles.toolsBox}>
-        <div className={styles.tools}>tools</div>
+        <ul className={styles.tools}>
+          {inconsArr.map((icon: string) => (
+            <li className={styles.itemTools} key={icon}>
+              <button type="button" className={styles.tool}>
+                <Icon name={icon} color={EColors.grey99} />
+              </button>
+            </li>
+          ))}
+        </ul>
         <button
           className={styles.button}
           type="submit"

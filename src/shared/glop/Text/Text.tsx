@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "./text.less";
 import classNames from "classnames";
-import { TSizes, EColors } from "../types.global";
+import { TSizes, EColors } from "../../types.global";
 
 interface ITextProps {
   As?: "span" | "h1" | "h2" | "h3" | "h4" | "h5" | "p" | "div";

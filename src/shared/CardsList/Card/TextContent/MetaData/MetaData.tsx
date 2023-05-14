@@ -1,14 +1,15 @@
 import React from "react";
 import styles from "./metadata.less";
 import { Break } from "../../../../Break";
-import { Text } from "../../../../Text";
+import { Text } from "../../../../glop/Text";
+import { Icon } from "../../../../glop/Icon";
 interface IPropsMeataData {
   subreddit?: string;
-  avatar: string;
+  avatar?: string;
   name: string;
 }
 
-export function MetaData({ subreddit, avatar, name }: IPropsMeataData) {
+export function MetaData({ subreddit, avatar = "", name }: IPropsMeataData) {
   return (
     <div className={styles.metaData}>
       {subreddit && (
@@ -20,15 +21,11 @@ export function MetaData({ subreddit, avatar, name }: IPropsMeataData) {
         </>
       )}
       <div className={styles.userLink}>
-        <img
-          className={styles.avatar}
-          src={
-            avatar
-              ? avatar
-              : "https://www.redditstatic.com/avatars/defaults/v2/avatar_default_4.png"
-          }
-          alt="avatar"
-        />
+        {avatar.length ? (
+          <img src={avatar} alt="avatar" className={styles.avatar} />
+        ) : (
+          <Icon name="anon" size={20} userClass={styles.avatar} />
+        )}
         <a className={styles.username} href="#user-url">
           {name}
         </a>

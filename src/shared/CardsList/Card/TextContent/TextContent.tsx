@@ -24,7 +24,7 @@ export function TextContent({
 }: IPropsTextContent) {
   return (
     <div className={styles.textContent}>
-      {commented && <Comments postId={id} subreddit={subreddit} />}
+      {/* {commented && <Comments postId={id} subreddit={subreddit} />} */}
 
       <MetaData avatar={avatar} name={name} />
       <TitleCard title={title} />

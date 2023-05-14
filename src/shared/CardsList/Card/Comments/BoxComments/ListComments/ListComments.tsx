@@ -1,6 +1,6 @@
 import React, { useContext, useState } from "react";
 import styles from "./listcomments.less";
-import { Text } from "../../../../../Text";
+import { Text } from "../../../../../glop/Text";
 import { EColors } from "../../../../../types.global";
 import { commentsContext } from "../../../../../context/commentsContext";
 import { Comment } from "./Comment";

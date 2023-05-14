@@ -1,10 +1,12 @@
-.up,
-.down {
-  display: flex;
+.karmaValue {
+  padding: 0 7px;
+  color: hsl(0, 0%, 77%);
 }
 
-.karmaValue {
-  color: hsl(0, 0%, 77%);
+.iconUp,
+.iconDown {
+  width: 19px;
+  height: 10px;
 }
 
 svg.down {
@@ -25,14 +27,12 @@ svg.down {
     line-height: 16px;
     color: #000;
   }
-}
 
-@media all and (min-width: 1024px) {
-  .karmaCounter>button.up:hover>svg>path {
+  .karmaCounter>button.up>span:hover>svg>path {
     fill: #A4CC33;
   }
 
-  .karmaCounter>button.down:hover>svg>path {
+  .karmaCounter>button.down>span:hover>svg>path {
     fill: #CC6633;
   }
 }

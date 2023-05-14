@@ -1,16 +1,15 @@
 import React from "react";
 import styles from "./modalcard.less";
 import ReactDOM from "react-dom";
-import { EIcons, Icon } from "../../Icon";
+import { EIcons, Icon } from "../../glop/Icon";
 import { EColors } from "../../types.global";
 import { CarmaCounter } from "../Card/Controls/CarmaCounter";
 import { Break } from "../../Break";
 import { MetaData } from "../Card/TextContent/MetaData";
-import { TitleCard } from "../Card/TextContent/TitleCard";
-import { Text } from "../../Text";
+import { Text } from "../../glop/Text";
 import { FormComments } from "../Card/Comments/BoxComments/ListComments/FormComments";
-import { ListComments } from "../Card/Comments/BoxComments/ListComments";
 import { ModalCommentsList } from "./ModalCommentsList";
+import { Separate } from "../../glop/Separate/Separate";
 
 interface IClickPost {
   data?: {
@@ -52,10 +51,13 @@ export function ModalCard({ post, setIsModal }: IPropsModalCard) {
         </button>
 
         <div className={styles.title}>
-          <CarmaCounter score={post.data.score} />
+          <CarmaCounter
+            score={post.data.score}
+            classUser={styles.karmaCounter}
+          />
           <Break size={22} />
           <div className={styles.textTitle}>
-            <Text As="h1" size={20}>
+            <Text As="h1" size={20} userClass={styles.titleTitle}>
               {post.data.title}
             </Text>
             <MetaData
@@ -68,11 +70,11 @@ export function ModalCard({ post, setIsModal }: IPropsModalCard) {
 
         <Text size={14}>{post.data.sr_detail.description}</Text>
 
-        <div className={styles.separate}></div>
+        <Separate userClass={styles.separate} color={EColors.greyD9} />
 
         <FormComments nameAutor={post.data.author} />
 
-        <div className={styles.separate}></div>
+        <Separate userClass={styles.separate} color={EColors.greyD9} />
 
         <ModalCommentsList id={post.data.id} subreddit={post.data.subreddit} />
       </div>

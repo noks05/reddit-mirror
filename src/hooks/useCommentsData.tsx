@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 
 interface ICommentsData {
@@ -6,6 +6,11 @@ interface ICommentsData {
     id: string;
     author: string;
     body: string;
+    replies?:
+      | string
+      | {
+          data: { children: ICommentsData };
+        };
   };
 }
 
@@ -17,7 +22,6 @@ export function useCommentsData(postId: string, subreddit: string) {
       .get(`http://api.reddit.com/r/${subreddit}/comments/${postId}`)
       .then((resp) => {
         const commentsData = resp.data[1].data.children;
-        console.log(resp.data[1].data.children);
         setData(commentsData);
       })
       .catch((e) => {

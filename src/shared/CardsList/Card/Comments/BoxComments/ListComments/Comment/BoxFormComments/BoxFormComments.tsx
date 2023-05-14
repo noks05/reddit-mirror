@@ -1,8 +1,8 @@
 import React, { useContext, useState } from "react";
 import styles from "./boxformcomments.less";
-import { EIcons, Icon } from "../../../../../../../Icon";
+import { EIcons, Icon } from "../../../../../../../glop/Icon";
 import { Break } from "../../../../../../../Break";
-import { Text } from "../../../../../../../Text";
+import { Text } from "../../../../../../../glop/Text";
 import { EColors } from "../../../../../../../types.global";
 import { FormComments } from "../../FormComments";
 import { commentsContext } from "../../../../../../../context/commentsContext";
@@ -29,7 +29,7 @@ export function BoxFormComments({ author }: { author: string }) {
         </Text>
       </button>
 
-      {isForm && <FormComments nameAutor={author}></FormComments>}
+      {/* {isForm && <FormComments nameAutor={author}></FormComments>} */}
     </div>
   );
 }

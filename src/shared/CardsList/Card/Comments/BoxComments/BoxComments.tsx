@@ -1,6 +1,6 @@
 import React from "react";
 import styles from "./boxcomments.less";
-import { EIcons, Icon } from "../../../../Icon";
+import { EIcons, Icon } from "../../../../glop/Icon";
 import { EColors } from "../../../../types.global";
 import { ListComments } from "./ListComments";
 

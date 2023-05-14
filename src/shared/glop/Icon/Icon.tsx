@@ -1,6 +1,6 @@
 import React from "react";
 import styles from "./icon.less";
-import { EColors, TSizes } from "../types.global";
+import { EColors, TSizes } from "../../types.global";
 import classNames from "classnames";
 import {
   CloseIcon,
@@ -12,6 +12,18 @@ import {
   WarningIcon,
   IconAnon,
   RainbowIcon,
+  UpIcon,
+  DownIcon,
+  ArrowsIcon,
+  PictureIcon,
+  FileIcon,
+  DownloadIcon,
+  AvatarIcon,
+  ReloadIcon,
+  LinkIcon,
+  PenIcon,
+  UnderlineIcon,
+  PdfIcon,
 } from "../icons";
 
 interface IIconsObject {
@@ -28,6 +40,18 @@ const allIcons: IIconsObject = {
   menu: <MenuIcon />,
   anon: <IconAnon />,
   rainbow: <RainbowIcon />,
+  up: <UpIcon />,
+  down: <DownIcon />,
+  arrows: <ArrowsIcon />,
+  picture: <PictureIcon />,
+  file: <FileIcon />,
+  download: <DownloadIcon />,
+  avatar: <AvatarIcon />,
+  reload: <ReloadIcon />,
+  link: <LinkIcon />,
+  pen: <PenIcon />,
+  underline: <UnderlineIcon />,
+  pdf: <PdfIcon />,
 };
 
 export enum EIcons {
@@ -40,6 +64,18 @@ export enum EIcons {
   menu = "menu",
   anon = "anon",
   rainbow = "rainbow",
+  up = "up",
+  down = "down",
+  arrows = "arrows",
+  picture = "picture",
+  file = "file",
+  download = "download",
+  avatar = "avatar",
+  reload = "reload",
+  link = "link",
+  pen = "pen",
+  underline = "underline",
+  pdf = "pdf",
 }
 
 interface IIconProps {

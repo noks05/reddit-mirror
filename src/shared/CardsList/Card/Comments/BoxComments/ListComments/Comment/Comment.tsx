@@ -1,17 +1,28 @@
-import React from "react";
+import React, { useState } from "react";
 import styles from "./comment.less";
-import { Text } from "../../../../../../Text";
+import { Text } from "../../../../../../glop/Text";
 import { EColors } from "../../../../../../types.global";
 import { MetaData } from "../../../../TextContent/MetaData";
-import { GenericList } from "../../../../../../../utils/react/GenericList";
 import { generateId } from "../../../../../../../utils/react/generateRandomIndex";
+import { GenericControls } from "../../../../../../../utils/react/GenericControls";
+import { FormComments } from "../FormComments";
 
-export function Comment({ comment }: { comment: any }) {
+export function Comment({
+  comment,
+  controls,
+}: {
+  comment: any;
+  controls?: string[];
+}) {
+  const [isForm, setIsForm] = useState(false);
   const data = [
     {
       img: "comments",
       text: "Ответить",
       desktop: true,
+      onClick: () => {
+        setIsForm(!isForm);
+      },
     },
     {
       img: "share",
@@ -23,15 +34,30 @@ export function Comment({ comment }: { comment: any }) {
       text: "Пожаловаться",
       desktop: true,
     },
+    {
+      img: "close",
+      text: "Скрыть",
+      desktop: false,
+    },
+    {
+      img: "save",
+      text: "Сохранить",
+      desktop: true,
+    },
   ].map((obj) => generateId(obj));
+
+  let filteredData: any[] = [];
+  if (controls) {
+    filteredData = controls
+      .map((str) => {
+        return data.find((obj) => obj.text === str);
+      })
+      .filter((el) => el !== undefined);
+  }
 
   return (
     <>
-      <MetaData
-        name={comment.author}
-        avatar={""}
-        subreddit={comment.subreddit}
-      />
+      <MetaData name={comment.data.author} subreddit={comment.data.subreddit} />
 
       <Text
         size={14}
@@ -42,9 +68,17 @@ export function Comment({ comment }: { comment: any }) {
         {comment.data.body}
       </Text>
 
-      <ul className={styles.list}>
-        <GenericList As="li" data={data} userClass={styles.item} />
-      </ul>
+      {filteredData.length !== 0 && (
+        <ul className={styles.list}>
+          <GenericControls
+            As="li"
+            data={filteredData}
+            userClass={styles.item}
+          />
+        </ul>
+      )}
+
+      {isForm && <FormComments nameAutor={comment.data.author} />}
     </>
   );
 }

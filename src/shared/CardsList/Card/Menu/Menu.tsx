@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Dropdown } from "../../../Dropdown";
 import { generateId } from "../../../../utils/react/generateRandomIndex";
-import { MenuIcon } from "../../../icons";
+import { MenuIcon } from "../../../glop/icons";
 import { MenuDropdownList } from "./MenuDropdownList";
 import styles from "./menu.less";
 

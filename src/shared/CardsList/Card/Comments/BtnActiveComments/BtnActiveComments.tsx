@@ -1,9 +1,9 @@
 import React from "react";
 import styles from "./btnactivecomments.less";
-import { EIcons, Icon } from "../../../../Icon";
+import { EIcons, Icon } from "../../../../glop/Icon";
 import { EColors } from "../../../../types.global";
 import { Break } from "../../../../Break";
-import { Text } from "../../../../Text";
+import { Text } from "../../../../glop/Text";
 interface IPropsBtnActiveComments {
   data: any;
   isActive: boolean;
@@ -14,7 +14,7 @@ interface IPropsBtnActiveComments {
 export function BtnActiveComments(props: IPropsBtnActiveComments) {
   const { data, isActive, setIsActive, setIsMore } = props;
 
-  function openComments(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
+  function openComments() {
     setIsActive(!isActive);
     setIsMore(false);
   }
@@ -27,7 +27,7 @@ export function BtnActiveComments(props: IPropsBtnActiveComments) {
           ? styles.button
           : [styles.button, styles.buttonOff].join(" ")
       }
-      onClick={(e) => openComments(e)}
+      onClick={() => openComments()}
     >
       <Icon
         name={EIcons.comments}

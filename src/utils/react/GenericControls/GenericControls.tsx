@@ -1,35 +1,36 @@
 import React from "react";
-import { ControlBtn } from "../../../shared/ui";
-import styles from "./genericList.less";
+import { ControlBtn } from "../../../shared/ui/ControlBtn";
+import styles from "./genericcontrols.less";
 
 interface IItem {
   id: string;
   text: string;
   img?: string;
   desktop: boolean;
+  onClick?: () => void;
 }
 
-interface IGenericListProps {
+interface IGenericControlsProps {
   data: IItem[];
   As?: "li" | "div" | "a" | "button";
   userClass?: string;
   classDesktop?: string;
 }
 
-export function GenericList({
+export function GenericControls({
   data,
   As = "div",
   userClass,
   classDesktop,
-}: IGenericListProps) {
+}: IGenericControlsProps) {
   return (
     <>
-      {data.map(({ img, text, id, desktop }) => (
+      {data.map(({ img, text, id, desktop, onClick }) => (
         <As
           key={id}
           className={[userClass, desktop ? classDesktop : ""].join(" ").trim()}
         >
-          <ControlBtn img={img} text={text} />
+          <ControlBtn img={img} text={text} onClick={onClick} />
         </As>
       ))}
     </>

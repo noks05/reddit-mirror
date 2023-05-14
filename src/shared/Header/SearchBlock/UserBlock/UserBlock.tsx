@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "./userblock.less";
-import { EIcons, Icon } from "../../../Icon";
-import { Text } from "../../../Text";
+import { EIcons, Icon } from "../../../glop/Icon";
+import { Text } from "../../../glop/Text";
 import { EColors } from "../../../types.global";
 import { Break } from "../../../Break";
 

@@ -1,7 +1,7 @@
 import React from "react";
-import { GenericList } from "../../../../../utils/react/GenericList";
 import ReactDOM from "react-dom";
 import styles from "./menudropdownlist.less";
+import { GenericControls } from "../../../../../utils/react/GenericControls";
 
 interface IItem {
   id: string;
@@ -30,7 +30,7 @@ export function MenuDropdownList({ items, coordinates }: IContentProps) {
   return ReactDOM.createPortal(
     <div className={styles.dropdown} style={positionDropdown}>
       <ul className={styles.menuItemsList}>
-        <GenericList
+        <GenericControls
           As="li"
           data={items}
           userClass={styles.menuItem}
