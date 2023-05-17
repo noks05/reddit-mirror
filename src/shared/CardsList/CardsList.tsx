@@ -1,43 +1,24 @@
-import React, { useContext, useState } from "react";
+import React, { useContext } from "react";
 import { Card } from "./Card";
 import styles from "./cardslist.less";
 import { postsContext } from "../context/postsContext";
-import { ModalCard } from "./ModalCard";
+import { cardContext } from "../context/cardContext";
 
 export function CardsList() {
   const data = useContext(postsContext);
+  const { Provider } = cardContext;
   const posts = data.posts;
-
-  const [isModal, setIsModal] = useState(false);
-  const [clickedPost, setClickedPost] = useState({});
-
-  function onClick(curTarget: HTMLElement) {
-    setIsModal(true);
-    const findPost = posts?.find((post) => {
-      return post.data.id === curTarget.id;
-    });
-    setClickedPost(findPost ? findPost : {});
-  }
 
   return (
     <>
       <ul className={styles.cardsList}>
         {posts &&
           posts.map((p) => (
-            <Card
-              key={p.data.id}
-              id={p.data.id}
-              subreddit={p.data.subreddit}
-              img={p.data.url}
-              name={p.data.author}
-              avatar={p.data.sr_detail.icon_img}
-              title={p.data.title}
-              score={p.data.score}
-              clickHandler={onClick}
-            />
+            <Provider value={p} key={p.data.id}>
+              <Card post={p.data} />
+            </Provider>
           ))}
       </ul>
-      {isModal && <ModalCard post={clickedPost} setIsModal={setIsModal} />}
     </>
   );
 }

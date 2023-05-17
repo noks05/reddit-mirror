@@ -20,7 +20,8 @@ export function Comment({
       img: "comments",
       text: "Ответить",
       desktop: true,
-      onClick: () => {
+      onClick: (e: MouseEvent) => {
+        e.stopPropagation();
         setIsForm(!isForm);
       },
     },

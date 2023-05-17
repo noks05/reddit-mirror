@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import styles from "./modalcard.less";
 import ReactDOM from "react-dom";
 import { EIcons, Icon } from "../../glop/Icon";
@@ -11,37 +11,56 @@ import { FormComments } from "../Card/Comments/BoxComments/ListComments/FormComm
 import { ModalCommentsList } from "./ModalCommentsList";
 import { Separate } from "../../glop/Separate/Separate";
 
-interface IClickPost {
-  data?: {
-    id: string;
-    subreddit: string;
-    author: string;
-    sr_detail: {
-      icon_img: string;
-      description: string;
-    };
-    url: string;
-    title: string;
-    score: string;
+interface IPost {
+  id: string;
+  subreddit: string;
+  author: string;
+  sr_detail: {
+    icon_img: string;
+    description: string;
   };
+  url: string;
+  title: string;
+  score: string;
 }
 
 interface IPropsModalCard {
-  post: IClickPost;
-  setIsModal: (isModal: boolean) => void;
+  post: IPost;
+  onClose: () => void;
 }
 
-export function ModalCard({ post, setIsModal }: IPropsModalCard) {
+export function ModalCard({ post, onClose }: IPropsModalCard) {
   if (typeof window === "undefined") return null;
-
   const portalRoot = document.getElementById("portal-root");
   if (!portalRoot) return null;
-  if (!post.data) return null;
+
+  const modalRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    function handleClick(e: Event) {
+      if (e.target instanceof Node) {
+        const clickOut = !modalRef.current?.contains(e.target);
+        const clickCloseBtn = modalRef.current
+          ?.querySelector("[class^='modalcard__closeBtn--']")
+          ?.contains(e.target);
+
+        if (clickOut || clickCloseBtn) {
+          onClose();
+        }
+      }
+    }
+
+    document.addEventListener("click", handleClick);
+
+    return () => {
+      document.removeEventListener("click", handleClick);
+    };
+  });
 
   return ReactDOM.createPortal(
     <div className={styles.wrapper}>
-      <div className={styles.box}>
-        <button className={styles.closeBtn} onClick={() => setIsModal(false)}>
+      <div className={styles.box} ref={modalRef}>
+        <button className={styles.closeBtn}>
           <Icon
             name={EIcons.closeX}
             size={14}
@@ -51,32 +70,29 @@ export function ModalCard({ post, setIsModal }: IPropsModalCard) {
         </button>
 
         <div className={styles.title}>
-          <CarmaCounter
-            score={post.data.score}
-            classUser={styles.karmaCounter}
-          />
+          <CarmaCounter score={post.score} classUser={styles.karmaCounter} />
           <Break size={22} />
           <div className={styles.textTitle}>
             <Text As="h1" size={20} userClass={styles.titleTitle}>
-              {post.data.title}
+              {post.title}
             </Text>
             <MetaData
-              name={post.data.author}
-              avatar={post.data.sr_detail.icon_img}
-              subreddit={post.data.subreddit}
+              name={post.author}
+              avatar={post.sr_detail.icon_img}
+              subreddit={post.subreddit}
             />
           </div>
         </div>
 
-        <Text size={14}>{post.data.sr_detail.description}</Text>
+        <Text size={14}>{post.sr_detail.description}</Text>
 
         <Separate userClass={styles.separate} color={EColors.greyD9} />
 
-        <FormComments nameAutor={post.data.author} />
+        <FormComments nameAutor={post.author} />
 
         <Separate userClass={styles.separate} color={EColors.greyD9} />
 
-        <ModalCommentsList id={post.data.id} subreddit={post.data.subreddit} />
+        <ModalCommentsList id={post.id} subreddit={post.subreddit} />
       </div>
     </div>,
     portalRoot

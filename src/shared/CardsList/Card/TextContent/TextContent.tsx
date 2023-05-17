@@ -1,33 +1,29 @@
 import React from "react";
 import styles from "./textcontent.less";
-import { Comments } from "../Comments";
 import { MetaData } from "./MetaData";
 import { TitleCard } from "./TitleCard";
 
 interface IPropsTextContent {
-  name: string;
-  avatar: string;
-  title: string;
-  id: string;
-  isSubreddit?: boolean;
-  subreddit: string;
-  commented?: boolean;
+  post: {
+    id: string;
+    subreddit: string;
+    author: string;
+    sr_detail: {
+      icon_img: string;
+      description: string;
+    };
+    url: string;
+    title: string;
+    score: string;
+  };
 }
-
-export function TextContent({
-  id,
-  subreddit,
-  name,
-  avatar,
-  title,
-  commented,
-}: IPropsTextContent) {
+export function TextContent({ post }: IPropsTextContent) {
   return (
     <div className={styles.textContent}>
       {/* {commented && <Comments postId={id} subreddit={subreddit} />} */}
 
-      <MetaData avatar={avatar} name={name} />
-      <TitleCard title={title} />
+      <MetaData avatar={post.url} name={post.author} />
+      <TitleCard post={post} />
     </div>
   );
 }
