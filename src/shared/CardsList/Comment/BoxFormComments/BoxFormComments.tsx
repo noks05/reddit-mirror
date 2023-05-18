@@ -1,12 +1,11 @@
 import React, { useContext, useState } from "react";
 import styles from "./boxformcomments.less";
-import { EIcons, Icon } from "../../../../../../../glop/Icon";
-import { Break } from "../../../../../../../Break";
-import { Text } from "../../../../../../../glop/Text";
-import { EColors } from "../../../../../../../types.global";
-import { FormComments } from "../../FormComments";
-import { commentsContext } from "../../../../../../../context/commentsContext";
-import { useChangePadding } from "../../../../../../../../hooks/useChangePadding";
+import { useChangePadding } from "../../../../hooks/useChangePadding";
+import { Break } from "../../../Break";
+import { commentsContext } from "../../../context/commentsContext";
+import { Icon, EIcons } from "../../../glop/Icon";
+import { EColors } from "../../../types.global";
+import { Text } from "../../../glop/Text";
 
 export function BoxFormComments({ author }: { author: string }) {
   const [isForm, setIsForm] = useState(false);
@@ -29,7 +28,7 @@ export function BoxFormComments({ author }: { author: string }) {
         </Text>
       </button>
 
-      {/* {isForm && <FormComments nameAutor={author}></FormComments>} */}
+      {/* {isForm && <FormComments ></FormComments>} */}
     </div>
   );
 }

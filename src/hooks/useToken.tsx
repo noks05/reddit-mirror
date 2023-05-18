@@ -1,12 +1,17 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { updateToken } from "../store";
 
 export function useToken() {
-  const [token, setToken] = useState("");
+  const dispatch = useDispatch();
+
+  function setToken(windowToken: string) {
+    dispatch(updateToken(windowToken));
+  }
 
   useEffect(() => {
-    if (window.__token__) {
+    if (typeof window !== undefined) {
       setToken(window.__token__);
     }
-  }, [token]);
-  return [token];
+  }, []);
 }

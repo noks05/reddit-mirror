@@ -7,9 +7,9 @@ import { CarmaCounter } from "../Card/Controls/CarmaCounter";
 import { Break } from "../../Break";
 import { MetaData } from "../Card/TextContent/MetaData";
 import { Text } from "../../glop/Text";
-import { FormComments } from "../Card/Comments/BoxComments/ListComments/FormComments";
 import { ModalCommentsList } from "./ModalCommentsList";
 import { Separate } from "../../glop/Separate/Separate";
+import { FormComments } from "../FormComments";
 
 interface IPost {
   id: string;
@@ -88,7 +88,7 @@ export function ModalCard({ post, onClose }: IPropsModalCard) {
 
         <Separate userClass={styles.separate} color={EColors.greyD9} />
 
-        <FormComments nameAutor={post.author} />
+        <FormComments />
 
         <Separate userClass={styles.separate} color={EColors.greyD9} />
 

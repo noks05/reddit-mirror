@@ -3,7 +3,7 @@ import styles from "./listcomments.less";
 import { Text } from "../../../../../glop/Text";
 import { EColors } from "../../../../../types.global";
 import { commentsContext } from "../../../../../context/commentsContext";
-import { Comment } from "./Comment";
+// import { Comment } from "../../../../Comment";
 
 export function ListComments() {
   const { data, setIsMore, isMore } = useContext(commentsContext);
@@ -16,7 +16,7 @@ export function ListComments() {
       <ul>
         {curData.map((comment) => (
           <li className={styles.commentBox} key={comment.data.id}>
-            <Comment comment={comment} />
+            {/* <Comment comment={comment} /> */}
           </li>
         ))}
       </ul>

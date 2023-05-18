@@ -1,7 +1,11 @@
 import React from "react";
 import styles from "./textcontent.less";
 import { MetaData } from "./MetaData";
-import { TitleCard } from "./TitleCard";
+import { TitleCardContainer } from "./TitleCardContainer";
+import { Provider } from "react-redux";
+import { composeWithDevTools } from "@redux-devtools/extension";
+import { legacy_createStore } from "redux";
+import { rootReducer } from "../../../../store";
 
 interface IPropsTextContent {
   post: {
@@ -17,13 +21,19 @@ interface IPropsTextContent {
     score: string;
   };
 }
+
+const store = legacy_createStore(rootReducer, composeWithDevTools());
+
 export function TextContent({ post }: IPropsTextContent) {
   return (
     <div className={styles.textContent}>
       {/* {commented && <Comments postId={id} subreddit={subreddit} />} */}
 
-      <MetaData avatar={post.url} name={post.author} />
-      <TitleCard post={post} />
+      <MetaData avatar={post.sr_detail.icon_img} name={post.author} />
+
+      <Provider store={store}>
+        <TitleCardContainer post={post} />
+      </Provider>
     </div>
   );
 }

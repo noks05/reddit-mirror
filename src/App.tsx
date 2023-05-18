@@ -4,19 +4,19 @@ import { CardsList } from "./shared/CardsList";
 import { Content } from "./shared/Content";
 import { Header } from "./shared/Header";
 import { Layout } from "./shared/Layout";
-import { useToken } from "./hooks/useToken";
-import { tokenContext } from "./shared/context/tokenContext";
 import { UserContextProvider } from "./shared/context/userContext";
 import { PostsContextProvider } from "./shared/context/postsContext";
+import { Provider, useDispatch } from "react-redux";
+import { composeWithDevTools } from "@redux-devtools/extension";
+import { legacy_createStore } from "redux";
+import { rootReducer } from "./store";
 import "./shared/main.global.less";
 
 function AppComponent() {
-  const [token] = useToken();
-
-  const { Provider } = tokenContext;
+  const store = legacy_createStore(rootReducer, composeWithDevTools());
 
   return (
-    <Provider value={token}>
+    <Provider store={store}>
       <UserContextProvider>
         <PostsContextProvider>
           <Layout>

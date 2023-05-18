@@ -1,12 +1,20 @@
-import React, { RefObject } from "react";
+import React from "react";
 import styles from "./genericcomments.less";
 import { Icon } from "../../../shared/glop/Icon";
-import { Comment } from "../../../shared/CardsList/Card/Comments/BoxComments/ListComments/Comment";
 import { EColors } from "../../../shared/types.global";
+import { composeWithDevTools } from "@redux-devtools/extension";
+import { legacy_createStore } from "redux";
+import { rootReducer } from "../../../store";
+import { Provider } from "react-redux";
+import { CommentContainer } from "../../../shared/CardsList/CommentContainer";
+
 interface IPropsGenericComments {
   data: any;
   classContainer?: string;
 }
+
+const store = legacy_createStore(rootReducer, composeWithDevTools());
+
 export function GenericComments({
   data,
   classContainer,
@@ -29,10 +37,12 @@ export function GenericComments({
               />
             </div>
 
-            <Comment
-              comment={comment}
-              controls={["Ответить", "Поделиться", "Пожаловаться"]}
-            />
+            <Provider store={store}>
+              <CommentContainer
+                comment={comment}
+                controls={["Ответить", "Поделиться", "Пожаловаться"]}
+              />
+            </Provider>
           </div>
 
           {comment.data.replies && (

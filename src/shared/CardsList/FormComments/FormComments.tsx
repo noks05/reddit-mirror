@@ -1,12 +1,18 @@
-import React, { RefObject, useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef } from "react";
 import styles from "./formcomments.less";
-import { Text } from "../../../../../../glop/Text";
-import { EColors } from "../../../../../../types.global";
-import { Icon } from "../../../../../../glop/Icon";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState, updateComment } from "../../../store";
+import { Icon } from "../../glop/Icon";
+import { EColors } from "../../types.global";
+import { Text } from "../../glop/Text";
 
-export function FormComments({ nameAutor }: { nameAutor: string }) {
+export function FormComments() {
+  const inputValue = useSelector<RootState, string>(
+    (state) => state.commentText
+  );
+  const dispatch = useDispatch();
+
   const inputRef = useRef<HTMLTextAreaElement | null>(null);
-  const [inputValue, setInputValue] = useState(`${nameAutor}, `);
   const inconsArr: string[] = [
     "arrows",
     "picture",
@@ -42,7 +48,10 @@ export function FormComments({ nameAutor }: { nameAutor: string }) {
         className={styles.input}
         ref={inputRef}
         value={inputValue}
-        onChange={(e) => setInputValue(e.currentTarget.value)}
+        // onChange={(e) => setInputValue(e.currentTarget.value)}
+        onChange={(e) => {
+          dispatch(updateComment(e.target.value));
+        }}
       />
       <div className={styles.toolsBox}>
         <ul className={styles.tools}>
