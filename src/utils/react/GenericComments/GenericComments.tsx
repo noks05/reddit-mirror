@@ -4,7 +4,7 @@ import { Icon } from "../../../shared/glop/Icon";
 import { EColors } from "../../../shared/types.global";
 import { composeWithDevTools } from "@redux-devtools/extension";
 import { legacy_createStore } from "redux";
-import { rootReducer } from "../../../store";
+import { rootReducer } from "../../../store/store";
 import { Provider } from "react-redux";
 import { CommentContainer } from "../../../shared/CardsList/CommentContainer";
 
@@ -12,8 +12,11 @@ interface IPropsGenericComments {
   data: any;
   classContainer?: string;
 }
-
-const store = legacy_createStore(rootReducer, composeWithDevTools());
+const store = legacy_createStore(
+  // @ts-ignore
+  rootReducer,
+  composeWithDevTools()
+);
 
 export function GenericComments({
   data,

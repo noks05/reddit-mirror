@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import styles from "./titlecardcontainer.less";
 import { useDispatch } from "react-redux";
-import { updateComment } from "../../../../../store";
+import { updateComment } from "../../../../../store/store";
 import { TitleCard } from "../TitleCard/TitleCard";
 
 interface IPropsTitleCardContainer {

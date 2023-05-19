@@ -6,13 +6,20 @@ interface IPropsUserContextProvider {
 }
 
 interface IUserContextData {
-  name?: string;
-  iconImg?: string;
+  data: { name?: string; iconImg?: string };
+  loading: boolean;
 }
-export const userContext = React.createContext<IUserContextData>({});
+export const userContext = React.createContext<IUserContextData>({
+  data: {},
+  loading: false,
+});
 
 export function UserContextProvider({ children }: IPropsUserContextProvider) {
-  const [data] = useUserData();
+  const { data, loading } = useUserData();
 
-  return <userContext.Provider value={data}>{children}</userContext.Provider>;
+  return (
+    <userContext.Provider value={{ data, loading }}>
+      {children}
+    </userContext.Provider>
+  );
 }

@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from "react";
 import styles from "./formcomments.less";
 import { useDispatch, useSelector } from "react-redux";
-import { RootState, updateComment } from "../../../store";
+import { RootState, updateComment } from "../../../store/store";
 import { Icon } from "../../glop/Icon";
 import { EColors } from "../../types.global";
 import { Text } from "../../glop/Text";

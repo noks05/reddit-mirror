@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import styles from "./commentcontainer.less";
 import { useDispatch } from "react-redux";
-import { updateComment } from "../../../store";
+import { updateComment } from "../../../store/store";
 import { Comment } from "../Comment/Comment";
 import { generateId } from "../../../utils/react/generateRandomIndex";
 

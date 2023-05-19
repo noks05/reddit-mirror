@@ -5,7 +5,7 @@ import { TitleCardContainer } from "./TitleCardContainer";
 import { Provider } from "react-redux";
 import { composeWithDevTools } from "@redux-devtools/extension";
 import { legacy_createStore } from "redux";
-import { rootReducer } from "../../../../store";
+import { rootReducer } from "../../../../store/store";
 
 interface IPropsTextContent {
   post: {
@@ -22,7 +22,11 @@ interface IPropsTextContent {
   };
 }
 
-const store = legacy_createStore(rootReducer, composeWithDevTools());
+const store = legacy_createStore(
+  // @ts-ignore
+  rootReducer,
+  composeWithDevTools()
+);
 
 export function TextContent({ post }: IPropsTextContent) {
   return (

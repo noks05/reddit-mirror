@@ -4,12 +4,15 @@ import { UserBlock } from "./UserBlock";
 import { userContext } from "../../context/userContext";
 
 export function SearchBlock() {
-  const data = useContext(userContext);
+  const { data, loading } = useContext(userContext);
 
   return (
     <div className={styles.searchBlock}>
-      search block
-      <UserBlock avatarSrc={data.iconImg} username={data.name} />
+      <UserBlock
+        avatarSrc={data.iconImg}
+        username={data.name}
+        loading={loading}
+      />
     </div>
   );
 }

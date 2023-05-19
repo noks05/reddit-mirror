@@ -1,0 +1,63 @@
+webpackHotUpdate("main",{
+
+/***/ "./node_modules/redux-thunk/es/index.js":
+/*!**********************************************!*\
+  !*** ./node_modules/redux-thunk/es/index.js ***!
+  \**********************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+eval("\r\nObject.defineProperty(exports, \"__esModule\", { value: true });\r\n/** A function that accepts a potential \"extra argument\" value to be injected later,\r\n * and returns an instance of the thunk middleware that uses that value\r\n */\r\nfunction createThunkMiddleware(extraArgument) {\r\n    // Standard Redux middleware definition pattern:\r\n    // See: https://redux.js.org/tutorials/fundamentals/part-4-store#writing-custom-middleware\r\n    var middleware = function middleware(_ref) {\r\n        var dispatch = _ref.dispatch, getState = _ref.getState;\r\n        return function (next) {\r\n            return function (action) {\r\n                // The thunk middleware looks for any functions that were passed to `store.dispatch`.\r\n                // If this \"action\" is really a function, call it and return the result.\r\n                if (typeof action === 'function') {\r\n                    // Inject the store's `dispatch` and `getState` methods, as well as any \"extra arg\"\r\n                    return action(dispatch, getState, extraArgument);\r\n                } // Otherwise, pass the action down the middleware chain as usual\r\n                return next(action);\r\n            };\r\n        };\r\n    };\r\n    return middleware;\r\n}\r\nvar thunk = createThunkMiddleware(); // Attach the factory function so users can create a customized version\r\n// with whatever \"extra arg\" they want to inject into their thunks\r\nthunk.withExtraArgument = createThunkMiddleware;\r\nexports.default = thunk;\r\n\n\n//# sourceURL=webpack:///./node_modules/redux-thunk/es/index.js?");
+
+/***/ }),
+
+/***/ "./src/App.tsx":
+/*!*********************!*\
+  !*** ./src/App.tsx ***!
+  \*********************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+eval("\r\nvar __importDefault = (this && this.__importDefault) || function (mod) {\r\n    return (mod && mod.__esModule) ? mod : { \"default\": mod };\r\n};\r\nObject.defineProperty(exports, \"__esModule\", { value: true });\r\nexports.App = void 0;\r\nvar react_1 = __importDefault(__webpack_require__(/*! react */ \"./node_modules/react/index.js\"));\r\nvar root_1 = __webpack_require__(/*! react-hot-loader/root */ \"./node_modules/react-hot-loader/root.js\");\r\nvar CardsList_1 = __webpack_require__(/*! ./shared/CardsList */ \"./src/shared/CardsList/index.ts\");\r\nvar Content_1 = __webpack_require__(/*! ./shared/Content */ \"./src/shared/Content/index.ts\");\r\nvar Header_1 = __webpack_require__(/*! ./shared/Header */ \"./src/shared/Header/index.ts\");\r\nvar Layout_1 = __webpack_require__(/*! ./shared/Layout */ \"./src/shared/Layout/index.ts\");\r\nvar userContext_1 = __webpack_require__(/*! ./shared/context/userContext */ \"./src/shared/context/userContext.tsx\");\r\nvar postsContext_1 = __webpack_require__(/*! ./shared/context/postsContext */ \"./src/shared/context/postsContext.tsx\");\r\nvar react_redux_1 = __webpack_require__(/*! react-redux */ \"./node_modules/react-redux/es/index.js\");\r\nvar extension_1 = __webpack_require__(/*! @redux-devtools/extension */ \"./node_modules/@redux-devtools/extension/lib/esm/index.js\");\r\nvar redux_1 = __webpack_require__(/*! redux */ \"./node_modules/redux/es/redux.js\");\r\nvar redux_thunk_1 = __importDefault(__webpack_require__(/*! redux-thunk */ \"./node_modules/redux-thunk/es/index.js\"));\r\nvar store_1 = __webpack_require__(/*! ./store/store */ \"./src/store/store.ts\");\r\nvar useToken_1 = __webpack_require__(/*! ./hooks/useToken */ \"./src/hooks/useToken.tsx\");\r\n__webpack_require__(/*! ./shared/main.global.less */ \"./src/shared/main.global.less\");\r\nvar store = (0, redux_1.legacy_createStore)(\r\n// @ts-ignore\r\nstore_1.rootReducer, (0, extension_1.composeWithDevTools)((0, redux_1.applyMiddleware)(redux_thunk_1.default)));\r\nfunction AppComponent() {\r\n    (0, useToken_1.useToken)(store);\r\n    return (react_1.default.createElement(react_redux_1.Provider, { store: store },\r\n        react_1.default.createElement(userContext_1.UserContextProvider, null,\r\n            react_1.default.createElement(postsContext_1.PostsContextProvider, null,\r\n                react_1.default.createElement(Layout_1.Layout, null,\r\n                    react_1.default.createElement(Header_1.Header, null),\r\n                    react_1.default.createElement(Content_1.Content, null,\r\n                        react_1.default.createElement(CardsList_1.CardsList, null)))))));\r\n}\r\nexports.App = (0, root_1.hot)(function () { return react_1.default.createElement(AppComponent, null); });\r\n\n\n//# sourceURL=webpack:///./src/App.tsx?");
+
+/***/ }),
+
+/***/ "./src/client/index.jsx":
+/*!******************************!*\
+  !*** ./src/client/index.jsx ***!
+  \******************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+eval("\r\nvar __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {\r\n    if (k2 === undefined) k2 = k;\r\n    var desc = Object.getOwnPropertyDescriptor(m, k);\r\n    if (!desc || (\"get\" in desc ? !m.__esModule : desc.writable || desc.configurable)) {\r\n      desc = { enumerable: true, get: function() { return m[k]; } };\r\n    }\r\n    Object.defineProperty(o, k2, desc);\r\n}) : (function(o, m, k, k2) {\r\n    if (k2 === undefined) k2 = k;\r\n    o[k2] = m[k];\r\n}));\r\nvar __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {\r\n    Object.defineProperty(o, \"default\", { enumerable: true, value: v });\r\n}) : function(o, v) {\r\n    o[\"default\"] = v;\r\n});\r\nvar __importStar = (this && this.__importStar) || function (mod) {\r\n    if (mod && mod.__esModule) return mod;\r\n    var result = {};\r\n    if (mod != null) for (var k in mod) if (k !== \"default\" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);\r\n    __setModuleDefault(result, mod);\r\n    return result;\r\n};\r\nObject.defineProperty(exports, \"__esModule\", { value: true });\r\nvar React = __importStar(__webpack_require__(/*! react */ \"./node_modules/react/index.js\"));\r\nvar ReactDOM = __importStar(__webpack_require__(/*! react-dom */ \"./node_modules/@hot-loader/react-dom/index.js\"));\r\nvar App_tsx_1 = __webpack_require__(/*! ../App.tsx */ \"./src/App.tsx\");\r\nwindow.addEventListener(\"load\", function () {\r\n    ReactDOM.hydrate(React.createElement(App_tsx_1.App, null), document.getElementById(\"react-root\"));\r\n});\r\n\n\n//# sourceURL=webpack:///./src/client/index.jsx?");
+
+/***/ }),
+
+/***/ "./src/shared/CardsList/Card/TextContent/TextContent.tsx":
+/*!***************************************************************!*\
+  !*** ./src/shared/CardsList/Card/TextContent/TextContent.tsx ***!
+  \***************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+eval("\r\nvar __importDefault = (this && this.__importDefault) || function (mod) {\r\n    return (mod && mod.__esModule) ? mod : { \"default\": mod };\r\n};\r\nObject.defineProperty(exports, \"__esModule\", { value: true });\r\nexports.TextContent = void 0;\r\nvar react_1 = __importDefault(__webpack_require__(/*! react */ \"./node_modules/react/index.js\"));\r\nvar textcontent_less_1 = __importDefault(__webpack_require__(/*! ./textcontent.less */ \"./src/shared/CardsList/Card/TextContent/textcontent.less\"));\r\nvar MetaData_1 = __webpack_require__(/*! ./MetaData */ \"./src/shared/CardsList/Card/TextContent/MetaData/index.ts\");\r\nvar TitleCardContainer_1 = __webpack_require__(/*! ./TitleCardContainer */ \"./src/shared/CardsList/Card/TextContent/TitleCardContainer/index.ts\");\r\nvar react_redux_1 = __webpack_require__(/*! react-redux */ \"./node_modules/react-redux/es/index.js\");\r\nvar extension_1 = __webpack_require__(/*! @redux-devtools/extension */ \"./node_modules/@redux-devtools/extension/lib/esm/index.js\");\r\nvar redux_1 = __webpack_require__(/*! redux */ \"./node_modules/redux/es/redux.js\");\r\nvar store_1 = __webpack_require__(/*! ../../../../store/store */ \"./src/store/store.ts\");\r\nvar store = (0, redux_1.legacy_createStore)(\r\n// @ts-ignore\r\nstore_1.rootReducer, (0, extension_1.composeWithDevTools)());\r\nfunction TextContent(_a) {\r\n    var post = _a.post;\r\n    return (react_1.default.createElement(\"div\", { className: textcontent_less_1.default.textContent },\r\n        react_1.default.createElement(MetaData_1.MetaData, { avatar: post.sr_detail.icon_img, name: post.author }),\r\n        react_1.default.createElement(react_redux_1.Provider, { store: store },\r\n            react_1.default.createElement(TitleCardContainer_1.TitleCardContainer, { post: post }))));\r\n}\r\nexports.TextContent = TextContent;\r\n\n\n//# sourceURL=webpack:///./src/shared/CardsList/Card/TextContent/TextContent.tsx?");
+
+/***/ }),
+
+/***/ "./src/utils/react/GenericComments/GenericComments.tsx":
+/*!*************************************************************!*\
+  !*** ./src/utils/react/GenericComments/GenericComments.tsx ***!
+  \*************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+eval("\r\nvar __importDefault = (this && this.__importDefault) || function (mod) {\r\n    return (mod && mod.__esModule) ? mod : { \"default\": mod };\r\n};\r\nObject.defineProperty(exports, \"__esModule\", { value: true });\r\nexports.GenericComments = void 0;\r\nvar react_1 = __importDefault(__webpack_require__(/*! react */ \"./node_modules/react/index.js\"));\r\nvar genericcomments_less_1 = __importDefault(__webpack_require__(/*! ./genericcomments.less */ \"./src/utils/react/GenericComments/genericcomments.less\"));\r\nvar Icon_1 = __webpack_require__(/*! ../../../shared/glop/Icon */ \"./src/shared/glop/Icon/index.ts\");\r\nvar types_global_1 = __webpack_require__(/*! ../../../shared/types.global */ \"./src/shared/types.global.ts\");\r\nvar extension_1 = __webpack_require__(/*! @redux-devtools/extension */ \"./node_modules/@redux-devtools/extension/lib/esm/index.js\");\r\nvar redux_1 = __webpack_require__(/*! redux */ \"./node_modules/redux/es/redux.js\");\r\nvar store_1 = __webpack_require__(/*! ../../../store/store */ \"./src/store/store.ts\");\r\nvar react_redux_1 = __webpack_require__(/*! react-redux */ \"./node_modules/react-redux/es/index.js\");\r\nvar CommentContainer_1 = __webpack_require__(/*! ../../../shared/CardsList/CommentContainer */ \"./src/shared/CardsList/CommentContainer/index.ts\");\r\nvar store = (0, redux_1.legacy_createStore)(\r\n// @ts-ignore\r\nstore_1.rootReducer, (0, extension_1.composeWithDevTools)());\r\nfunction GenericComments(_a) {\r\n    var data = _a.data, classContainer = _a.classContainer;\r\n    return (react_1.default.createElement(\"ul\", { className: classContainer }, data.map(function (comment) { return (react_1.default.createElement(\"li\", { className: genericcomments_less_1.default.comment, key: comment.data.id },\r\n        react_1.default.createElement(\"div\", { className: genericcomments_less_1.default.commentInner },\r\n            react_1.default.createElement(\"div\", { className: genericcomments_less_1.default.hideControls },\r\n                react_1.default.createElement(Icon_1.Icon, { name: \"up\", userClass: genericcomments_less_1.default.iconUp, color: types_global_1.EColors.greyD9 }),\r\n                react_1.default.createElement(Icon_1.Icon, { name: \"down\", userClass: genericcomments_less_1.default.iconDown, color: types_global_1.EColors.greyD9 })),\r\n            react_1.default.createElement(react_redux_1.Provider, { store: store },\r\n                react_1.default.createElement(CommentContainer_1.CommentContainer, { comment: comment, controls: [\"Ответить\", \"Поделиться\", \"Пожаловаться\"] }))),\r\n        comment.data.replies && (react_1.default.createElement(GenericComments, { data: comment.data.replies.data.children })))); })));\r\n}\r\nexports.GenericComments = GenericComments;\r\n\n\n//# sourceURL=webpack:///./src/utils/react/GenericComments/GenericComments.tsx?");
+
+/***/ })
+
+})

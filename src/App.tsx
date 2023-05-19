@@ -6,15 +6,22 @@ import { Header } from "./shared/Header";
 import { Layout } from "./shared/Layout";
 import { UserContextProvider } from "./shared/context/userContext";
 import { PostsContextProvider } from "./shared/context/postsContext";
-import { Provider, useDispatch } from "react-redux";
+import { Provider } from "react-redux";
 import { composeWithDevTools } from "@redux-devtools/extension";
-import { legacy_createStore } from "redux";
-import { rootReducer } from "./store";
+import { applyMiddleware, legacy_createStore } from "redux";
+import thunk from "redux-thunk";
+import { rootReducer } from "./store/store";
+import { useToken } from "./hooks/useToken";
 import "./shared/main.global.less";
 
-function AppComponent() {
-  const store = legacy_createStore(rootReducer, composeWithDevTools());
+const store = legacy_createStore(
+  // @ts-ignore
+  rootReducer,
+  composeWithDevTools(applyMiddleware(thunk))
+);
 
+function AppComponent() {
+  useToken(store);
   return (
     <Provider store={store}>
       <UserContextProvider>

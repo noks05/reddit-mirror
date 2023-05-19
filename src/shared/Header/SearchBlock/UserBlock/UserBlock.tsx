@@ -8,8 +8,9 @@ import { Break } from "../../../Break";
 interface IUserBlockPros {
   avatarSrc?: string;
   username?: string;
+  loading?: boolean;
 }
-export function UserBlock({ avatarSrc, username }: IUserBlockPros) {
+export function UserBlock({ avatarSrc, username, loading }: IUserBlockPros) {
   return (
     <a
       href="https://www.reddit.com/api/v1/authorize?client_id=1zvLRFTNIfKsrbNLPmr0UA&response_type=code&state=random_string&redirect_uri=http://localhost:3000/auth&duration=permanent&scope=read submit identity"
@@ -29,9 +30,15 @@ export function UserBlock({ avatarSrc, username }: IUserBlockPros) {
 
       <div className={styles.username}>
         <Break size={12} />
-        <Text size={20} color={username ? EColors.black : EColors.grey99}>
-          {username || "Аноним"}
-        </Text>
+        {loading ? (
+          <Text size={16} color={EColors.greyC4}>
+            Загрузка...
+          </Text>
+        ) : (
+          <Text size={20} color={username ? EColors.black : EColors.grey99}>
+            {username || "Аноним"}
+          </Text>
+        )}
       </div>
     </a>
   );

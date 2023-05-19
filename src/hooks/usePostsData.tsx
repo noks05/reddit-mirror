@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { useSelector } from "react-redux";
-import { RootState } from "../store";
+import { useSelector, useStore } from "react-redux";
+import { RootState } from "../store/store";
 
 interface IPost {
   data: {
@@ -25,21 +25,25 @@ interface IPostsData {
 export function usePostsData() {
   const [data, setData] = useState<IPostsData>({});
 
-  const token = useSelector<RootState>((state) => state.token);
+  const token = useSelector<RootState>((state) => {
+    return state.token;
+  });
 
   useEffect(() => {
-    if (token !== "" && token !== "undefined") {
-      axios
-        .get("https://oauth.reddit.com/best.json?sr_detail=true", {
-          headers: { Authorization: `bearer ${token}` },
-        })
-        .then((resp) => {
-          const postsData = resp.data.data.children;
-          // console.log(resp.data.data.children);
-          setData({ posts: postsData });
-        })
-        .catch(console.log);
-    }
+    if (!token) return;
+    axios
+      .get("https://oauth.reddit.com/best.json?sr_detail=true", {
+        headers: { Authorization: `bearer ${token}` },
+      })
+      .then((resp) => {
+        const postsData = resp.data.data.children;
+        // console.log(resp.data.data.children);
+        setData({ posts: postsData });
+      })
+      .catch(console.log);
+    return () => {
+      setData({});
+    };
   }, [token]);
 
   return [data];

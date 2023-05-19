@@ -7,6 +7,5 @@ interface ILayoutProps {
 }
 
 export function Layout({ children }: ILayoutProps) {
-  useToken();
   return <div className={styles.layout}>{children}</div>;
 }
