@@ -22,6 +22,7 @@ const store = legacy_createStore(
 
 function AppComponent() {
   useToken(store);
+
   return (
     <Provider store={store}>
       <UserContextProvider>

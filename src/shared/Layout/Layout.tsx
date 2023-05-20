@@ -1,6 +1,5 @@
 import React from "react";
 import styles from "./layout.less";
-import { useToken } from "../../hooks/useToken";
 
 interface ILayoutProps {
   children?: React.ReactNode;

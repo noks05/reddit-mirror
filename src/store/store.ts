@@ -1,7 +1,8 @@
 import { Reducer } from "react";
-import { ActionCreator, AnyAction } from "redux";
+import { Action, ActionCreator, AnyAction } from "redux";
 import { ME_REQUEST, ME_REQUEST_ERROR, ME_REQUEST_SUCCESS, MeRequestAction, MeRequestActionError, MeRequestActionSuccess } from "./me/actions";
 import { MeState, meReducer } from "./reducer";
+import { ThunkAction } from "redux-thunk";
 
 const UPDATE_COMMENT = "UPDATE_COMMENT"
 type UpdateCommentAction = {
@@ -18,7 +19,7 @@ type SetTokenAction = {
   type: typeof TOKEN
   text: string
 }
-export const updateToken: ActionCreator<SetTokenAction> = (text) => ({
+export const setToken: ActionCreator<SetTokenAction> = (text) => ({
   type: TOKEN,
   text,
 });

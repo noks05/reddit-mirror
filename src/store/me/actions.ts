@@ -1,6 +1,6 @@
 import { Action, ActionCreator } from "redux"
 import { ThunkAction } from "redux-thunk"
-import { RootState } from "../store"
+import { RootState, setToken } from "../store"
 import axios from "axios"
 
 export const ME_REQUEST = 'ME_REQUEST'
@@ -59,4 +59,22 @@ export const meRequestAsync = (): ThunkAction<void, RootState, unknown, Action<s
       console.log(error);
       dispatch(meRequestError(String(error)));
     });
+}
+
+
+export const saveToken = (): ThunkAction<void, RootState, unknown, Action<string>> => (dispatch) => {
+  function getToken() {
+    const checkToken =
+      typeof window !== undefined &&
+      window.__token__ !== "undefined" &&
+      window.__token__;
+
+    const resp = checkToken || localStorage.getItem("token");
+    return resp;
+  }
+  const token = getToken();
+  if (token) {
+    dispatch(setToken(token));
+    localStorage.setItem("token", token);
+  }
 }
