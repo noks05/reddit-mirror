@@ -1,8 +1,7 @@
 import { Reducer } from "react";
-import { Action, ActionCreator, AnyAction } from "redux";
+import { ActionCreator, AnyAction } from "redux";
 import { ME_REQUEST, ME_REQUEST_ERROR, ME_REQUEST_SUCCESS, MeRequestAction, MeRequestActionError, MeRequestActionSuccess } from "./me/actions";
 import { MeState, meReducer } from "./reducer";
-import { ThunkAction } from "redux-thunk";
 
 const UPDATE_COMMENT = "UPDATE_COMMENT"
 type UpdateCommentAction = {
@@ -24,14 +23,26 @@ export const setToken: ActionCreator<SetTokenAction> = (text) => ({
   text,
 });
 
+const AFTER = "AFTER"
+type SetAfterAction = {
+  type: typeof AFTER
+  text: string
+}
+export const setAfter: ActionCreator<SetAfterAction> = (text) => ({
+  type: AFTER,
+  text,
+});
+
 export type RootState = {
   commentText: string;
   token: string;
   me: MeState;
+  nextAfter: string;
 }
 const initialState: RootState = {
   commentText: "",
   token: "",
+  nextAfter: "",
   me: {
     loading: false,
     error: '',
@@ -55,6 +66,11 @@ export const rootReducer: Reducer<RootState, MyAction> = (state: RootState = ini
       return {
         ...state,
         token: action.text,
+      };
+    case AFTER:
+      return {
+        ...state,
+        nextAfter: action.text,
       };
     case ME_REQUEST:
     case ME_REQUEST_SUCCESS:

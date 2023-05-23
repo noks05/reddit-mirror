@@ -20,11 +20,14 @@ interface IPostContextData {
 }
 interface IPostsContextData {
   posts?: IPostContextData[];
+  isLoading?: boolean;
+  errorLoading?: string;
+  load?: () => void;
 }
 export const postsContext = React.createContext<IPostsContextData>({});
 
 export function PostsContextProvider({ children }: IPropsPostsContextProvider) {
-  const [data] = usePostsData();
+  const data = usePostsData();
 
   return <postsContext.Provider value={data}>{children}</postsContext.Provider>;
 }

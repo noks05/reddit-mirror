@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { useSelector, useStore } from "react-redux";
-import { RootState } from "../store/store";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState, setAfter } from "../store/store";
 
 interface IPost {
   data: {
@@ -18,33 +18,72 @@ interface IPost {
   };
 }
 
-interface IPostsData {
-  posts?: IPost[];
-}
-
-export function usePostsData() {
-  const [data, setData] = useState<IPostsData>({});
+export function usePostsData(bottomListEl?: Element | null) {
+  const [posts, setPosts] = useState<IPost[]>([]);
+  const [isLoading, setIsLoading] = useState(false);
+  const [errorLoading, setErrorLoading] = useState("");
+  // const [nextAfter, setNextAfter] = useState("");
+  const dispatch = useDispatch();
 
   const token = useSelector<RootState>((state) => {
     return state.token;
   });
+  const nextAfter = useSelector<RootState>((state) => {
+    return state.nextAfter;
+  });
 
   useEffect(() => {
     if (!token) return;
-    axios
-      .get("https://oauth.reddit.com/best.json?sr_detail=true", {
-        headers: { Authorization: `bearer ${token}` },
-      })
-      .then((resp) => {
-        const postsData = resp.data.data.children;
-        // console.log(resp.data.data.children);
-        setData({ posts: postsData });
-      })
-      .catch(console.log);
+
+    async function load() {
+      setIsLoading(true);
+      setErrorLoading("");
+
+      try {
+        const {
+          data: {
+            data: { after, children },
+          },
+        } = await axios.get(
+          "https://oauth.reddit.com/best.json?sr_detail=true",
+          {
+            headers: { Authorization: `bearer ${token}` },
+            params: {
+              limit: 7,
+              after: nextAfter,
+            },
+          }
+        );
+
+        dispatch(setAfter(after));
+        setPosts((prevChildren) => prevChildren.concat(...children));
+      } catch (error) {
+        setErrorLoading(String(error));
+      }
+
+      setIsLoading(false);
+    }
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting) {
+          load();
+        }
+      },
+      { rootMargin: "10px" }
+    );
+
+    if (bottomListEl) {
+      observer.observe(bottomListEl);
+    }
+
     return () => {
-      setData({});
+      if (bottomListEl) {
+        observer.unobserve(bottomListEl);
+      }
+      setPosts([]);
     };
   }, [token]);
 
-  return [data];
+  return { posts, isLoading, errorLoading };
 }
