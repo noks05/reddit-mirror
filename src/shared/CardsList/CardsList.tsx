@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Card } from "./Card";
 import styles from "./cardslist.less";
 import { cardContext } from "../context/cardContext";
@@ -7,29 +7,21 @@ import { usePostsData } from "../../hooks/usePostsData";
 export function CardsList() {
   const { Provider } = cardContext;
   const bottomOfList = useRef(null);
+  const [loadMore, setLoadMore] = useState(false);
+  const { posts, isLoading, errorLoading } = usePostsData(
+    bottomOfList.current,
+    loadMore
+  );
 
-  const { posts, isLoading, errorLoading } = usePostsData(bottomOfList.current);
-  // useEffect(() => {
-  //   const observer = new IntersectionObserver(
-  //     (entries) => {
-  //       if (load && !entries[0].isIntersecting) {
-  //         console.log(load);
-  //         load();
-  //       }
-  //     },
-  //     { rootMargin: "10px" }
-  //   );
+  useEffect(() => {
+    const check1 = posts.length !== 0;
+    const check2 = (posts.length / 7) % 3 === 2;
 
-  //   if (bottomOfList.current) {
-  //     observer.observe(bottomOfList.current);
-  //   }
-
-  //   return () => {
-  //     if (bottomOfList.current) {
-  //       observer.unobserve(bottomOfList.current);
-  //     }
-  //   };
-  // }, [load]);
+    if (check1 && check2) {
+      setLoadMore(true);
+    }
+    console.log(posts.length);
+  }, [posts]);
 
   return (
     <>
@@ -47,9 +39,11 @@ export function CardsList() {
             </Provider>
           ))}
 
-        <div ref={bottomOfList}></div>
+        {!loadMore && (
+          <div className={styles.observerElem} ref={bottomOfList}></div>
+        )}
 
-        {isLoading && (
+        {!loadMore && isLoading && (
           <div role="alert" style={{ textAlign: "center" }}>
             Загрузка...
           </div>
@@ -58,6 +52,20 @@ export function CardsList() {
         {errorLoading && (
           <div role="alert" style={{ textAlign: "center" }}>
             {errorLoading}
+          </div>
+        )}
+
+        {loadMore && (
+          <div className={styles.contrLoadMore}>
+            <button
+              className={styles.btnLoadMore}
+              type="button"
+              role="alert"
+              style={{ textAlign: "center" }}
+              onClick={() => setLoadMore(false)}
+            >
+              Загрузить ещё
+            </button>
           </div>
         )}
       </ul>

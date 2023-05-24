@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { useDispatch, useSelector } from "react-redux";
-import { RootState, setAfter } from "../store/store";
+import { useSelector } from "react-redux";
+import { RootState } from "../store/store";
 
 interface IPost {
   data: {
@@ -18,18 +18,16 @@ interface IPost {
   };
 }
 
-export function usePostsData(bottomListEl?: Element | null) {
-  const [posts, setPosts] = useState<IPost[]>([]);
+export function usePostsData(
+  bottomListEl?: Element | null,
+  loadMore?: boolean
+) {
   const [isLoading, setIsLoading] = useState(false);
   const [errorLoading, setErrorLoading] = useState("");
-  // const [nextAfter, setNextAfter] = useState("");
-  const dispatch = useDispatch();
+  const [posts, setPosts] = useState<IPost[]>([]);
 
   const token = useSelector<RootState>((state) => {
     return state.token;
-  });
-  const nextAfter = useSelector<RootState>((state) => {
-    return state.nextAfter;
   });
 
   useEffect(() => {
@@ -40,6 +38,8 @@ export function usePostsData(bottomListEl?: Element | null) {
       setErrorLoading("");
 
       try {
+        const nextAfter = localStorage.getItem("after");
+        console.log(nextAfter);
         const {
           data: {
             data: { after, children },
@@ -55,8 +55,8 @@ export function usePostsData(bottomListEl?: Element | null) {
           }
         );
 
-        dispatch(setAfter(after));
-        setPosts((prevChildren) => prevChildren.concat(...children));
+        localStorage.setItem("after", after);
+        setPosts((prevChildren: any) => prevChildren.concat(...children));
       } catch (error) {
         setErrorLoading(String(error));
       }
@@ -67,10 +67,11 @@ export function usePostsData(bottomListEl?: Element | null) {
     const observer = new IntersectionObserver(
       (entries) => {
         if (entries[0].isIntersecting) {
+          console.log(bottomListEl);
           load();
         }
       },
-      { rootMargin: "10px" }
+      { rootMargin: "50px" }
     );
 
     if (bottomListEl) {
@@ -83,7 +84,7 @@ export function usePostsData(bottomListEl?: Element | null) {
       }
       setPosts([]);
     };
-  }, [token]);
+  }, [token, bottomListEl]);
 
   return { posts, isLoading, errorLoading };
 }

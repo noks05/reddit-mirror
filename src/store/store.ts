@@ -23,26 +23,26 @@ export const setToken: ActionCreator<SetTokenAction> = (text) => ({
   text,
 });
 
-const AFTER = "AFTER"
-type SetAfterAction = {
-  type: typeof AFTER
-  text: string
-}
-export const setAfter: ActionCreator<SetAfterAction> = (text) => ({
-  type: AFTER,
-  text,
-});
+// const AFTER = "AFTER"
+// type SetAfterAction = {
+//   type: typeof AFTER
+//   text: string
+// }
+// export const setAfter: ActionCreator<SetAfterAction> = (text) => ({
+//   type: AFTER,
+//   text,
+// });
 
 export type RootState = {
   commentText: string;
   token: string;
   me: MeState;
-  nextAfter: string;
+  // nextAfter: string;
 }
 const initialState: RootState = {
   commentText: "",
   token: "",
-  nextAfter: "",
+  // nextAfter: "",
   me: {
     loading: false,
     error: '',
@@ -67,11 +67,11 @@ export const rootReducer: Reducer<RootState, MyAction> = (state: RootState = ini
         ...state,
         token: action.text,
       };
-    case AFTER:
-      return {
-        ...state,
-        nextAfter: action.text,
-      };
+    // case AFTER:
+    //   return {
+    //     ...state,
+    //     nextAfter: action.text,
+    //   };
     case ME_REQUEST:
     case ME_REQUEST_SUCCESS:
     case ME_REQUEST_ERROR:

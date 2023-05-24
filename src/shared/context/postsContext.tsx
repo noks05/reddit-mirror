@@ -22,7 +22,6 @@ interface IPostsContextData {
   posts?: IPostContextData[];
   isLoading?: boolean;
   errorLoading?: string;
-  load?: () => void;
 }
 export const postsContext = React.createContext<IPostsContextData>({});
 
