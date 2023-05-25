@@ -5,7 +5,7 @@ import { Content } from "./shared/Content";
 import { Header } from "./shared/Header";
 import { Layout } from "./shared/Layout";
 import { UserContextProvider } from "./shared/context/userContext";
-import { PostsContextProvider } from "./shared/context/postsContext";
+// import { PostsContextProvider } from "./shared/context/postsContext";
 import { Provider } from "react-redux";
 import { composeWithDevTools } from "@redux-devtools/extension";
 import { applyMiddleware, legacy_createStore } from "redux";
@@ -15,7 +15,6 @@ import { useToken } from "./hooks/useToken";
 import "./shared/main.global.less";
 
 const store = legacy_createStore(
-  // @ts-ignore
   rootReducer,
   composeWithDevTools(applyMiddleware(thunk))
 );
@@ -26,14 +25,14 @@ function AppComponent() {
   return (
     <Provider store={store}>
       <UserContextProvider>
-        <PostsContextProvider>
-          <Layout>
-            <Header />
-            <Content>
-              <CardsList />
-            </Content>
-          </Layout>
-        </PostsContextProvider>
+        {/* <PostsContextProvider> */}
+        <Layout>
+          <Header />
+          <Content>
+            <CardsList />
+          </Content>
+        </Layout>
+        {/* </PostsContextProvider> */}
       </UserContextProvider>
     </Provider>
   );

@@ -12,11 +12,7 @@ interface IPropsGenericComments {
   data: any;
   classContainer?: string;
 }
-const store = legacy_createStore(
-  // @ts-ignore
-  rootReducer,
-  composeWithDevTools()
-);
+const store = legacy_createStore(rootReducer, composeWithDevTools());
 
 export function GenericComments({
   data,

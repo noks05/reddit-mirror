@@ -1,7 +1,8 @@
-import { useEffect, useState } from "react";
 import axios from "axios";
+import { useState } from "react";
 import { useSelector } from "react-redux";
 import { RootState } from "../store/store";
+import { useObserver } from "./useObserver";
 
 interface IPost {
   data: {
@@ -18,73 +19,60 @@ interface IPost {
   };
 }
 
-export function usePostsData(
-  bottomListEl?: Element | null,
-  loadMore?: boolean
-) {
+export function usePostsData(observableEl: HTMLDivElement | null) {
+  const [loadMore, setLoadMore] = useState(false);
+  const [countLoad, setCountLoad] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
   const [errorLoading, setErrorLoading] = useState("");
   const [posts, setPosts] = useState<IPost[]>([]);
+  const [nextAfter, setNextAfter] = useState("");
 
-  const token = useSelector<RootState>((state) => {
+  const token = useSelector<RootState, string>((state) => {
     return state.token;
   });
 
-  useEffect(() => {
-    if (!token) return;
+  async function load() {
+    setIsLoading(true);
+    setErrorLoading("");
 
-    async function load() {
-      setIsLoading(true);
-      setErrorLoading("");
+    try {
+      const {
+        data: {
+          data: { after, children },
+        },
+      } = await axios.get("https://oauth.reddit.com/rising?sr_detail=true", {
+        headers: { Authorization: `bearer ${token}` },
+        params: {
+          limit: 7,
+          after: nextAfter,
+        },
+      });
 
-      try {
-        const nextAfter = localStorage.getItem("after");
-        console.log(nextAfter);
-        const {
-          data: {
-            data: { after, children },
-          },
-        } = await axios.get(
-          "https://oauth.reddit.com/best.json?sr_detail=true",
-          {
-            headers: { Authorization: `bearer ${token}` },
-            params: {
-              limit: 7,
-              after: nextAfter,
-            },
-          }
-        );
-
-        localStorage.setItem("after", after);
-        setPosts((prevChildren: any) => prevChildren.concat(...children));
-      } catch (error) {
-        setErrorLoading(String(error));
-      }
-
-      setIsLoading(false);
+      setNextAfter(after);
+      setPosts((prevChildren: any) => prevChildren.concat(...children));
+    } catch (error) {
+      setErrorLoading(String(error));
     }
 
-    const observer = new IntersectionObserver(
-      (entries) => {
-        if (entries[0].isIntersecting) {
-          console.log(bottomListEl);
-          load();
-        }
-      },
-      { rootMargin: "50px" }
-    );
+    setIsLoading(false);
+  }
+  useObserver(
+    observableEl,
+    load,
+    countLoad,
+    setCountLoad,
+    setLoadMore,
+    nextAfter,
+    token
+  );
 
-    if (bottomListEl) {
-      observer.observe(bottomListEl);
-    }
-
-    return () => {
-      if (bottomListEl) {
-        observer.unobserve(bottomListEl);
-      }
-      setPosts([]);
-    };
-  }, [token, bottomListEl]);
-
-  return { posts, isLoading, errorLoading };
+  return {
+    posts,
+    isLoading,
+    errorLoading,
+    loadMore,
+    setLoadMore,
+    setCountLoad,
+    load,
+  };
 }

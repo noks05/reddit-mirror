@@ -11,9 +11,8 @@ export function useUserData() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if (!token) return;
-    //@ts-ignore
-    dispatch(meRequestAsync());
+    if (!token || token === "undefined") return;
+    dispatch(meRequestAsync() as any);
   }, [token]);
 
   return { data, loading };

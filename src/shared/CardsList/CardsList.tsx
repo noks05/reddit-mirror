@@ -1,68 +1,82 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useRef } from "react";
 import { Card } from "./Card";
 import styles from "./cardslist.less";
 import { cardContext } from "../context/cardContext";
 import { usePostsData } from "../../hooks/usePostsData";
+import { generateRandomString } from "../../utils/react/generateRandomIndex";
+
+interface IPost {
+  data: {
+    id: string;
+    subreddit: string;
+    author: string;
+    sr_detail: {
+      icon_img: string;
+      description: string;
+    };
+    url: string;
+    title: string;
+    score: string;
+  };
+}
 
 export function CardsList() {
   const { Provider } = cardContext;
   const bottomOfList = useRef(null);
-  const [loadMore, setLoadMore] = useState(false);
-  const { posts, isLoading, errorLoading } = usePostsData(
-    bottomOfList.current,
-    loadMore
-  );
-
-  useEffect(() => {
-    const check1 = posts.length !== 0;
-    const check2 = (posts.length / 7) % 3 === 2;
-
-    if (check1 && check2) {
-      setLoadMore(true);
-    }
-    console.log(posts.length);
-  }, [posts]);
+  const {
+    posts,
+    isLoading,
+    errorLoading,
+    loadMore,
+    setLoadMore,
+    setCountLoad,
+    load,
+  } = usePostsData(bottomOfList.current);
 
   return (
     <>
       <ul className={styles.cardsList}>
-        {posts?.length === 0 && !isLoading && !errorLoading && (
-          <div role="alert" style={{ textAlign: "center" }}>
-            Ни одного поста не найдено
-          </div>
-        )}
-
         {posts &&
           posts.map((p) => (
-            <Provider value={p} key={p.data.id}>
+            <Provider value={p} key={p.data.id + generateRandomString()}>
               <Card post={p.data} />
             </Provider>
           ))}
+
+        {posts?.length === 0 && !isLoading && !errorLoading && (
+          <div className={styles.textCenter} role="alert">
+            Ни одного поста не найдено
+          </div>
+        )}
 
         {!loadMore && (
           <div className={styles.observerElem} ref={bottomOfList}></div>
         )}
 
         {!loadMore && isLoading && (
-          <div role="alert" style={{ textAlign: "center" }}>
-            Загрузка...
+          <div className={styles.contr}>
+            <div className={styles.loader} role="alert"></div>
           </div>
         )}
 
         {errorLoading && (
-          <div role="alert" style={{ textAlign: "center" }}>
+          <div role="alert" className={styles.textAlign}>
             {errorLoading}
           </div>
         )}
 
         {loadMore && (
-          <div className={styles.contrLoadMore}>
+          <div className={styles.contr}>
             <button
               className={styles.btnLoadMore}
               type="button"
               role="alert"
               style={{ textAlign: "center" }}
-              onClick={() => setLoadMore(false)}
+              onClick={() => {
+                load();
+                setLoadMore(false);
+                setCountLoad(1);
+              }}
             >
               Загрузить ещё
             </button>
