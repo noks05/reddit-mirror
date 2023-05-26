@@ -1,37 +1,21 @@
-import React, { useRef } from "react";
+import React, { useContext, useRef } from "react";
 import { Card } from "./Card";
 import styles from "./cardslist.less";
 import { cardContext } from "../context/cardContext";
-import { usePostsData } from "../../hooks/usePostsData";
 import { generateRandomString } from "../../utils/react/generateRandomIndex";
-
-interface IPost {
-  data: {
-    id: string;
-    subreddit: string;
-    author: string;
-    sr_detail: {
-      icon_img: string;
-      description: string;
-    };
-    url: string;
-    title: string;
-    score: string;
-  };
-}
+import { useObserver } from "../../hooks/useObserver";
+import { postsContext } from "../context/postsContext";
 
 export function CardsList() {
   const { Provider } = cardContext;
   const bottomOfList = useRef(null);
-  const {
-    posts,
-    isLoading,
-    errorLoading,
-    loadMore,
-    setLoadMore,
-    setCountLoad,
-    load,
-  } = usePostsData(bottomOfList.current);
+  const { load, nextAfter, posts, isLoading, errorLoading } =
+    useContext(postsContext);
+  const { setCountLoad, setLoadMore, loadMore } = useObserver(
+    bottomOfList,
+    nextAfter,
+    load
+  );
 
   return (
     <>
@@ -73,7 +57,7 @@ export function CardsList() {
               role="alert"
               style={{ textAlign: "center" }}
               onClick={() => {
-                load();
+                load && load();
                 setLoadMore(false);
                 setCountLoad(1);
               }}

@@ -1,8 +1,8 @@
-import React, { useState } from "react";
-import styles from "./titlecardcontainer.less";
+import React from "react";
 import { useDispatch } from "react-redux";
 import { updateComment } from "../../../../../store/store";
 import { TitleCard } from "../TitleCard/TitleCard";
+import styles from "./titlecardcontainer.less";
 
 interface IPropsTitleCardContainer {
   post: {
@@ -20,18 +20,9 @@ interface IPropsTitleCardContainer {
 }
 
 export function TitleCardContainer({ post }: IPropsTitleCardContainer) {
-  const [isModalOpen, setIsModalOpen] = useState(false);
   const dispatch = useDispatch();
   function onClick() {
     dispatch(updateComment(`${post.author}, `));
-    setIsModalOpen(true);
   }
-  return (
-    <TitleCard
-      post={post}
-      onClick={onClick}
-      isModalOpen={isModalOpen}
-      setIsModalOpen={setIsModalOpen}
-    />
-  );
+  return <TitleCard post={post} onClick={onClick} />;
 }

@@ -1,22 +1,21 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 export function useObserver(
-  observableEl: HTMLDivElement | null,
-  load: () => Promise<void>,
-  countLoad: number,
-  setCountLoad: (el: number) => void,
-  setLoadMore: (el: boolean) => void,
-  nextAfter: string,
-  token: string
+  observableEl: React.MutableRefObject<HTMLDivElement | null>,
+  nextAfter?: string,
+  load?: () => Promise<void>
 ) {
+  const [countLoad, setCountLoad] = useState(0);
+  const [loadMore, setLoadMore] = useState(false);
+
   function createObserver() {
-    const observer = new IntersectionObserver(
+    const observerObj = new IntersectionObserver(
       (entries) => {
         if (entries[0].isIntersecting) {
           switch (countLoad) {
             case 0:
             case 1:
-              load();
+              load && load();
               setCountLoad(countLoad + 1);
               break;
             case 2:
@@ -27,22 +26,22 @@ export function useObserver(
       { rootMargin: "50px" }
     );
 
-    if (observableEl) {
-      observer.observe(observableEl);
+    if (observableEl && observableEl.current) {
+      observerObj.observe(observableEl.current);
     }
 
-    return observer;
+    return observerObj;
   }
 
   useEffect(() => {
-    if (!token || token === "undefined") return;
-
     const observer = createObserver();
 
     return () => {
-      if (observableEl) {
-        observer.unobserve(observableEl);
+      if (observableEl && observableEl.current) {
+        observer.unobserve(observableEl.current);
       }
     };
-  }, [token, nextAfter]);
+  }, [nextAfter]);
+
+  return { setCountLoad, setLoadMore, loadMore };
 }

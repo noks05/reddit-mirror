@@ -1,12 +1,10 @@
 import React from "react";
 import styles from "./titlecard.less";
-import { ModalCard } from "../../../ModalCard";
+import { Link } from "react-router-dom";
 
 interface IPropsTitleCard {
   post: IPost;
   onClick: () => void;
-  isModalOpen: boolean;
-  setIsModalOpen: (isModalOpen: boolean) => void;
 }
 
 interface IPost {
@@ -22,23 +20,14 @@ interface IPost {
   score: string;
 }
 
-export function TitleCard({
-  post,
-  onClick,
-  isModalOpen,
-  setIsModalOpen,
-}: IPropsTitleCard) {
+export function TitleCard({ post, onClick }: IPropsTitleCard) {
   return (
     <>
       <h2 className={styles.title} onClick={onClick}>
-        <a className={styles.postLink} href="#post-url">
+        <Link to={`/posts/${post.id}`} className={styles.postLink}>
           {post.title}
-        </a>
+        </Link>
       </h2>
-
-      {isModalOpen && (
-        <ModalCard post={post} onClose={() => setIsModalOpen(false)} />
-      )}
     </>
   );
 }

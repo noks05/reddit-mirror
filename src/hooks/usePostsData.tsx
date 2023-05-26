@@ -1,8 +1,7 @@
 import axios from "axios";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { RootState } from "../store/store";
-import { useObserver } from "./useObserver";
 
 interface IPost {
   data: {
@@ -19,9 +18,7 @@ interface IPost {
   };
 }
 
-export function usePostsData(observableEl: HTMLDivElement | null) {
-  const [loadMore, setLoadMore] = useState(false);
-  const [countLoad, setCountLoad] = useState(0);
+export function usePostsData() {
   const [isLoading, setIsLoading] = useState(false);
   const [errorLoading, setErrorLoading] = useState("");
   const [posts, setPosts] = useState<IPost[]>([]);
@@ -32,6 +29,7 @@ export function usePostsData(observableEl: HTMLDivElement | null) {
   });
 
   async function load() {
+    if (!token || token === "undefined") return;
     setIsLoading(true);
     setErrorLoading("");
 
@@ -56,23 +54,16 @@ export function usePostsData(observableEl: HTMLDivElement | null) {
 
     setIsLoading(false);
   }
-  useObserver(
-    observableEl,
-    load,
-    countLoad,
-    setCountLoad,
-    setLoadMore,
-    nextAfter,
-    token
-  );
+
+  useEffect(() => {
+    load();
+  }, [token]);
 
   return {
     posts,
     isLoading,
     errorLoading,
-    loadMore,
-    setLoadMore,
-    setCountLoad,
     load,
+    nextAfter,
   };
 }

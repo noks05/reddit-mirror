@@ -7,9 +7,9 @@ import { useForm } from "react-hook-form";
 import { ToolsBar } from "./ToolsBar";
 
 export function FormComments() {
-  const inputValue = useSelector<RootState, string>(
-    (state) => state.commentText
-  );
+  const inputValue = useSelector<RootState, string>((state) => {
+    return state.commentText;
+  });
   const dispatch = useDispatch();
 
   const inputRef = useRef<HTMLFormElement | null>(null);
