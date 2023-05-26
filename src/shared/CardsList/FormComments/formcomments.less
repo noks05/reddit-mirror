@@ -23,43 +23,9 @@
 .input:focus {
   color: #CC6633;
   outline: none;
+  border: 1px solid #CC6633;
 }
 
-.toolsBox {
-  display: flex;
-}
-
-.tools {
-  display: flex;
-  align-items: center;
-  flex-wrap: wrap;
-  flex-grow: 1;
-  padding: 15px 19px;
-  background-color: #E5E5E5;
-}
-
-.itemTools:not(:last-child) {
-  margin-right: 26px;
-}
-
-.tool span svg path {
-  transition: fill .2s ease-in-out;
-}
-
-.tool:hover span svg path {
-  fill: black;
-}
-
-.button {
-  text-align: center;
-  max-width: 220px;
-  width: 100%;
-  padding: 17px 10px;
-  background-color: #CC6633;
-  color: #fff;
-  transition: background-color .2s ease-in-out;
-}
-
-.button:hover {
-  background-color: #e1a07f;
+.input[aria-invalid] {
+  border: 2px solid #ff4343;
 }

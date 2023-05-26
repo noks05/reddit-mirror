@@ -2,9 +2,9 @@ import React, { useEffect, useRef } from "react";
 import styles from "./formcomments.less";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState, updateComment } from "../../../store/store";
-import { Icon } from "../../glop/Icon";
-import { EColors } from "../../types.global";
-import { Text } from "../../glop/Text";
+import { useFocusInput } from "../../../hooks/useFocusInput";
+import { useForm } from "react-hook-form";
+import { ToolsBar } from "./ToolsBar";
 
 export function FormComments() {
   const inputValue = useSelector<RootState, string>(
@@ -12,7 +12,7 @@ export function FormComments() {
   );
   const dispatch = useDispatch();
 
-  const inputRef = useRef<HTMLTextAreaElement | null>(null);
+  const inputRef = useRef<HTMLFormElement | null>(null);
   const inconsArr: string[] = [
     "arrows",
     "picture",
@@ -25,54 +25,44 @@ export function FormComments() {
     "underline",
     "pdf",
   ];
+  useFocusInput(inputRef);
+
+  const {
+    watch,
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
+
+  const onSubmit = (data: any) => {
+    console.log("Ваш комментарий отправлен!\n", "текст: ", data.comment);
+  };
+  errors.comment && console.log(errors.comment.message);
 
   useEffect(() => {
-    if (inputRef) {
-      const inputHtmlElem = inputRef.current;
-      if (!inputHtmlElem) return;
-      inputHtmlElem.focus();
-      inputHtmlElem.selectionStart = inputHtmlElem.value.length;
-    }
-  }, []);
+    const subscription = watch((value) =>
+      dispatch(updateComment(value.comment))
+    );
+    return () => subscription.unsubscribe();
+  }, [watch]);
 
   return (
-    <form className={styles.container} action="">
-      {/* неконтролируемая компонента */}
-      {/* <textarea
-        className={styles.input}
-        ref={inputRef}
-        defaultValue={inputValue}
-      /> */}
-      {/* контролируемая компонента */}
+    <form
+      className={styles.container}
+      action=""
+      onSubmit={handleSubmit(onSubmit)}
+      ref={inputRef}
+    >
       <textarea
         className={styles.input}
-        ref={inputRef}
         value={inputValue}
-        // onChange={(e) => setInputValue(e.currentTarget.value)}
-        onChange={(e) => {
-          dispatch(updateComment(e.target.value));
-        }}
+        {...register("comment", {
+          required: "Ошибка!",
+          maxLength: 1000,
+        })}
+        aria-invalid={errors.comment ? true : undefined}
       />
-      <div className={styles.toolsBox}>
-        <ul className={styles.tools}>
-          {inconsArr.map((icon: string) => (
-            <li className={styles.itemTools} key={icon}>
-              <button type="button" className={styles.tool}>
-                <Icon name={icon} color={EColors.grey99} />
-              </button>
-            </li>
-          ))}
-        </ul>
-        <button
-          className={styles.button}
-          type="submit"
-          onClick={(e) => e.preventDefault()}
-        >
-          <Text size={14} color={EColors.white}>
-            Комментировать
-          </Text>
-        </button>
-      </div>
+      <ToolsBar icons={inconsArr} />
     </form>
   );
 }
