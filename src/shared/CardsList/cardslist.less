@@ -10,7 +10,10 @@
 }
 
 .textCenter {
-  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
 }
 
 .btnLoadMore {
@@ -70,5 +73,12 @@
 
   100% {
     transform: rotate(360deg);
+  }
+}
+
+@media all and (max-width: 1023px) {
+  .textCenter svg {
+    width: 30px;
+    height: 30px;
   }
 }

@@ -2,7 +2,6 @@ import React from "react";
 import styles from "./textcontent.less";
 import { MetaData } from "./MetaData";
 import { TitleCardContainer } from "./TitleCardContainer";
-import { Provider } from "react-redux";
 import { composeWithDevTools } from "@redux-devtools/extension";
 import { legacy_createStore } from "redux";
 import { rootReducer } from "../../../../store/store";
@@ -31,9 +30,7 @@ export function TextContent({ post }: IPropsTextContent) {
 
       <MetaData avatar={post.sr_detail.icon_img} name={post.author} />
 
-      <Provider store={store}>
-        <TitleCardContainer post={post} />
-      </Provider>
+      <TitleCardContainer post={post} />
     </div>
   );
 }

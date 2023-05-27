@@ -1,5 +1,5 @@
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useSelector } from "react-redux";
 import { RootState } from "../store/store";
 
@@ -27,6 +27,7 @@ export function usePostsData() {
   const token = useSelector<RootState, string>((state) => {
     return state.token;
   });
+  // const token = "";
 
   async function load() {
     if (!token || token === "undefined") return;
@@ -54,10 +55,6 @@ export function usePostsData() {
 
     setIsLoading(false);
   }
-
-  useEffect(() => {
-    load();
-  }, [token]);
 
   return {
     posts,

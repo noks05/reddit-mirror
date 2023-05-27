@@ -1,0 +1,29 @@
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  height: 100vh;
+}
+
+.container>*,
+.container>*+* {
+  padding-bottom: 20px;
+}
+
+.linkMeanPage {
+  padding: 15px 30px;
+  border: 1px solid #cc6633;
+  border-radius: 5px;
+  font-weight: bold;
+  color: #fff;
+  background-color: #cc6633;
+  transition-property: background-color, border-color;
+  transition-duration: .2s;
+  transition-timing-function: ease-in-out;
+}
+
+.linkMeanPage:hover {
+  background-color: #de7b49;
+  border-color: #de7b49
+}

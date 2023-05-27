@@ -76,6 +76,7 @@ export enum EIcons {
   pen = "pen",
   underline = "underline",
   pdf = "pdf",
+  smile = "smile",
 }
 
 interface IIconProps {

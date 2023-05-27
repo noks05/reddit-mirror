@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { hot } from "react-hot-loader/root";
-import { CardsList } from "./shared/CardsList";
 import { Content } from "./shared/Content";
 import { Header } from "./shared/Header";
 import { Layout } from "./shared/Layout";
@@ -13,7 +12,8 @@ import thunk from "redux-thunk";
 import { rootReducer } from "./store/store";
 import { useToken } from "./hooks/useToken";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import { ModalCardContainer } from "./shared/CardsList/ModalCardContainer";
+import { RoutesPosts } from "./shared/RoutesPosts";
+import { CardsList } from "./shared/CardsList";
 import "./shared/main.global.less";
 
 const store = legacy_createStore(
@@ -35,18 +35,16 @@ function AppComponent() {
         <BrowserRouter>
           <UserContextProvider>
             <PostsContextProvider>
-              <Layout>
-                <Header />
-                <Content>
-                  <CardsList />
-                  <Routes>
-                    <Route
-                      path="/posts/:id"
-                      element={<ModalCardContainer />}
-                    ></Route>
-                  </Routes>
-                </Content>
-              </Layout>
+              <RoutesPosts
+                Layout={
+                  <Layout>
+                    <Header />
+                    <Content>
+                      <CardsList />
+                    </Content>
+                  </Layout>
+                }
+              />
             </PostsContextProvider>
           </UserContextProvider>
         </BrowserRouter>

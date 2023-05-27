@@ -1,15 +1,11 @@
-import React from 'react';
-import styles from './content.less';
+import React from "react";
+import styles from "./content.less";
+import { useHref } from "react-router-dom";
 
 interface IContentProps {
   children?: React.ReactNode;
 }
 
 export function Content({ children }: IContentProps) {
-  return (
-    <main className={styles.content}>
-      {children}
-    </main>
-  )
+  return <main className={styles.content}>{children}</main>;
 }
-

@@ -23,26 +23,26 @@ export const setToken: ActionCreator<SetTokenAction> = (text) => ({
   text,
 });
 
-// const AFTER = "AFTER"
-// type SetAfterAction = {
-//   type: typeof AFTER
-//   text: string
-// }
-// export const setAfter: ActionCreator<SetAfterAction> = (text) => ({
-//   type: AFTER,
-//   text,
-// });
+const COUNT_LOAD = "COUNT_LOAD"
+type SetCountLoadAction = {
+  type: typeof COUNT_LOAD
+  number: number
+}
+export const setCountLoad: ActionCreator<SetCountLoadAction> = (number) => ({
+  type: COUNT_LOAD,
+  number,
+});
 
 export type RootState = {
   commentText: string;
   token: string;
   me: MeState;
-  // nextAfter: string;
+  countLoad: number;
 }
 const initialState: RootState = {
   commentText: "",
   token: "",
-  // nextAfter: "",
+  countLoad: 0,
   me: {
     loading: false,
     error: '',
@@ -52,6 +52,7 @@ const initialState: RootState = {
 
 type MyAction = UpdateCommentAction
   | SetTokenAction
+  | SetCountLoadAction
   | MeRequestAction
   | MeRequestActionSuccess
   | MeRequestActionError
@@ -67,11 +68,11 @@ export const rootReducer = (state: RootState = initialState, action: MyAction) =
         ...state,
         token: action.text,
       };
-    // case AFTER:
-    //   return {
-    //     ...state,
-    //     nextAfter: action.text,
-    //   };
+    case COUNT_LOAD:
+      return {
+        ...state,
+        countLoad: action.number,
+      };
     case ME_REQUEST:
     case ME_REQUEST_SUCCESS:
     case ME_REQUEST_ERROR:

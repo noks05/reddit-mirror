@@ -1,21 +1,24 @@
 import React, { useContext, useRef } from "react";
 import { Card } from "./Card";
-import styles from "./cardslist.less";
 import { cardContext } from "../context/cardContext";
 import { generateRandomString } from "../../utils/react/generateRandomIndex";
 import { useObserver } from "../../hooks/useObserver";
 import { postsContext } from "../context/postsContext";
+import { Text } from "../glop/Text";
+import { Smile } from "../glop/img/Smile";
+import styles from "./cardslist.less";
+import { useDispatch } from "react-redux";
+import { setCountLoad } from "../../store/store";
 
 export function CardsList() {
   const { Provider } = cardContext;
   const bottomOfList = useRef(null);
+
   const { load, nextAfter, posts, isLoading, errorLoading } =
     useContext(postsContext);
-  const { setCountLoad, setLoadMore, loadMore } = useObserver(
-    bottomOfList,
-    nextAfter,
-    load
-  );
+
+  const { setLoadMore, loadMore } = useObserver(bottomOfList, nextAfter, load);
+  const dispatch = useDispatch();
 
   return (
     <>
@@ -29,7 +32,10 @@ export function CardsList() {
 
         {posts?.length === 0 && !isLoading && !errorLoading && (
           <div className={styles.textCenter} role="alert">
-            Ни одного поста не найдено
+            <Smile />
+            <Text size={28} mobileSize={16}>
+              Хмм... здесь пока пусто{" "}
+            </Text>
           </div>
         )}
 
@@ -49,7 +55,7 @@ export function CardsList() {
           </div>
         )}
 
-        {loadMore && (
+        {posts?.length !== 0 && loadMore && (
           <div className={styles.contr}>
             <button
               className={styles.btnLoadMore}
@@ -59,7 +65,7 @@ export function CardsList() {
               onClick={() => {
                 load && load();
                 setLoadMore(false);
-                setCountLoad(1);
+                dispatch(setCountLoad(1));
               }}
             >
               Загрузить ещё

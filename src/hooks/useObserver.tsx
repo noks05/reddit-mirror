@@ -1,11 +1,14 @@
 import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState, setCountLoad } from "../store/store";
 
 export function useObserver(
   observableEl: React.MutableRefObject<HTMLDivElement | null>,
   nextAfter?: string,
   load?: () => Promise<void>
 ) {
-  const [countLoad, setCountLoad] = useState(0);
+  const countLoad = useSelector<RootState, number>((state) => state.countLoad);
+  const dispatch = useDispatch();
   const [loadMore, setLoadMore] = useState(false);
 
   function createObserver() {
@@ -16,7 +19,7 @@ export function useObserver(
             case 0:
             case 1:
               load && load();
-              setCountLoad(countLoad + 1);
+              dispatch(setCountLoad(countLoad + 1));
               break;
             case 2:
               setLoadMore(true);
@@ -43,5 +46,5 @@ export function useObserver(
     };
   }, [nextAfter]);
 
-  return { setCountLoad, setLoadMore, loadMore };
+  return { setLoadMore, loadMore };
 }

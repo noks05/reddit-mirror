@@ -22,7 +22,6 @@ interface IPostsContextData {
   posts?: IPostContextData[];
   isLoading?: boolean;
   errorLoading?: string;
-  token?: string;
   nextAfter?: string;
   load?: () => Promise<void>;
 }
